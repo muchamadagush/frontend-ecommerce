@@ -1,0 +1,21 @@
+.paddingTopBody {
+  padding-top: 150px;
+}
+
+.content {
+  background: #f5f5f5;
+  padding-top: 150px;
+  height: 100%;
+  padding-left: 45px !important;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 576px) {
+  .paddingTopBody {
+    padding-top: 90px;
+  }
+
+  .contentBody {
+    padding: 120px 30px 30px;
+  }
+}

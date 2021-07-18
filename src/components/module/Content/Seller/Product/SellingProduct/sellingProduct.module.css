@@ -1,0 +1,44 @@
+.contentBody {
+  width: 850px;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+form {
+  margin-top: unset;
+}
+
+.itemDetails,
+.photoOfGoods,
+.description,
+.inventory {
+  background: #ffffff;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #222222;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9b9b9b;
+  margin-right: 20px;
+}
+
+.label {
+  margin-top: 1rem;
+}
+
+hr {
+  margin: 1rem 0 !important;
+}

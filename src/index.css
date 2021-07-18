@@ -1,13 +1,40 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: Metropolis !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/Metropolis_Font_Family_(Fontmirror)/Metropolis-Regular 400.otf');
+}
+
+.tab.active {
+  border-bottom: 3px solid #db3022;
+  color: #db3022 !important;
+}
+
+.pagination li.active {
+  color: #db3022 !important;
+  font-weight: bold;
+}
+
+.img-slider {
+  width: 450px !important;
+  height: 180px;
+  margin: 0 5px;
+}
+
+.img-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media (max-width: 576px) {
+  .img-slider {
+    height: 90px;
+    width: 225px !important;
+  }
 }

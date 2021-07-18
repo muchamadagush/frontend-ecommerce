@@ -1,0 +1,77 @@
+.button {
+  background: unset;
+  box-sizing: border-box;
+  border-radius: 24px;
+  font-size: 14px;
+  border: 1.5px solid rgb(34, 34, 34);
+}
+
+.bigLong {
+  width: 343px;
+  height: 48px;
+}
+
+.bigShort {
+  width: 160px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background: rgb(219, 48, 34);
+  border: unset;
+  color: #fff;
+}
+
+.buy {
+  width: 322px;
+  height: 36px;
+  margin: 0 24px 24px;
+}
+
+.chooseAddress {
+  width: 210px;
+  height: 36px;
+  border: 1px solid #9b9b9b;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #9b9b9b;
+}
+
+.payment {
+  width: 322px;
+  height: 36px;
+}
+
+.submit {
+  width: 100px;
+  height: 36px;
+  margin-top: 48px;
+  margin-left: 130px;
+  border: 1px solid #9b9b9b;
+  color: #9b9b9b;
+}
+
+.selectImage {
+  height: 36px;
+  width: 140px;
+  border: 1px solid #9b9b9b;
+  color: #9b9b9b;
+}
+
+@media (max-width: 576px) {
+  .chooseAddress {
+    font-size: 12px;
+    width: 190px;
+  }
+
+  .payment {
+    width: 100%;
+  }
+
+  .buy {
+    margin: unset;
+  }
+}

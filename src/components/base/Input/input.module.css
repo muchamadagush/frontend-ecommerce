@@ -1,0 +1,30 @@
+.input {
+  border-radius: 23px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #9b9b9b;
+  padding-left: 20px;
+  border: 1px solid #9b9b9b;
+}
+
+.input:focus {
+  outline-offset: 0;
+}
+
+.search {
+  height: 40px;
+  width: 507px;
+  margin-right: .5rem;
+  outline: none;
+}
+
+@media (max-width: 576px) {
+  .search {
+    height: 36px;
+    width: 100%;
+  }
+}

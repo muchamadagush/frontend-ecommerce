@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import { API_URL } from "../../api/index"
-import Navbar from "../../components/module/Navbar";
 import styles from "./cart.module.css"
 import { Link } from "react-router-dom";
+import Navbar from "../../components/module/Navbar/Core";
 import Button from "../../components/base/Button";
+import Brand from "../../components/module/Navbar/Brand";
+import Toggler from "../../components/module/Navbar/Toggler";
+import Filter from "../../components/module/Navbar/Filter";
+import NavRight from "../../components/module/Navbar/NavRight";
+import Cart from "../../components/module/Navbar/Cart";
+import Account from "../../components/module/Navbar/Account";
 
-const Cart = () => {
+const Carts = () => {
 
   const [carts, setCarts] = useState([])
   const userId = 7
@@ -29,7 +35,16 @@ const Cart = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar>
+        <Brand />
+        <Toggler>
+          <Filter />
+          <NavRight>
+            <Cart />
+            <Account />
+          </NavRight>
+        </Toggler>
+      </Navbar>
 
       <div className={`container ${styles.marginTopBody}`}>
           <form onSubmit={handleSubmit}>
@@ -110,4 +125,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Carts

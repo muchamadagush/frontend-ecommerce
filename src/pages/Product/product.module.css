@@ -23,6 +23,10 @@
   color: #9b9b9b;
 }
 
+.ps {
+  padding-left: 3rem;
+}
+
 .title {
   font-weight: 600;
   font-size: 28px;
@@ -106,8 +110,6 @@
 .formCheck {
   width: 36px !important;
   height: 36px !important;
-  margin: 15px 20px 15px 0 !important;
-  border-radius: 50% !important;
   border: 3px solid #fff !important;
 }
 
@@ -174,7 +176,7 @@
   color: rgb(34, 34, 34);
 }
 
-.count {
+.counts {
   font-weight: 500;
   font-size: 16px;
   line-height: 16px;
@@ -225,17 +227,21 @@
 
 .progress {
   width: 120px;
-  height: 5px;
-  margin-right: .5rem;
-  background: unset;
+  height: 5px !important;
+  margin-right: 0.5rem;
+  background: transparent !important;
 }
 
 .bgDanger {
-  background-color: #db3022;
+  background-color: #db3022 !important;
 }
 
 .link {
   text-decoration: none;
+}
+
+.rates {
+  margin-right: 60px;
 }
 
 @media (min-width: 992px) {
@@ -248,5 +254,79 @@
 @media (max-width: 576px) {
   .marginTopBody {
     margin-top: 100px;
-  }  
+  }
+
+  .ps {
+    padding-left: 12px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .store {
+    font-size: 12px;
+    margin: 5px 0;
+  }
+
+  .rating {
+    font-size: 10px;
+  }
+
+  .star {
+    width: 10px;
+  }
+
+  .price {
+    margin: 15px 0 10px;
+  }
+
+  .priceTitle {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .priceValue {
+    font-size: 18px;
+  }
+
+  .colorTitle {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .formCheck {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .qtyTitle,
+  .sizeTitle {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .countMinus {
+    width: 24px;
+    height: 24px;
+  }
+
+  .countPlus {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .countsTitle {
+    font-size: 12px;
+    margin: 0 10px;
+  }
+
+  .rates {
+    margin-right: 20px;
+  }
+
+  .mainImage {
+    width: 100%;
+  }
 }

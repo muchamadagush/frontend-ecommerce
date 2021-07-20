@@ -1,11 +1,26 @@
 import styles from "./checkout.module.css";
-import Navbar from "../../components/module/Navbar";
 import Button from "../../components/base/Button";
+import Navbar from "../../components/module/Navbar/Core";
+import Brand from "../../components/module/Navbar/Brand";
+import Toggler from "../../components/module/Navbar/Toggler";
+import Filter from "../../components/module/Navbar/Filter";
+import NavRight from "../../components/module/Navbar/NavRight";
+import Cart from "../../components/module/Navbar/Cart";
+import Auth from "../../components/module/Navbar/Auth";
 
 const Checkout = () => {
   return (
     <>
-      <Navbar />
+      <Navbar>
+        <Brand />
+        <Toggler>
+          <Filter/>
+          <NavRight>
+            <Cart />
+            <Auth />
+          </NavRight>
+        </Toggler>
+      </Navbar>
 
       <div className={`container ${styles.marginTopBody}`}>
         <div className="row">

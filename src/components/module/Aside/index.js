@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import styles from './aside.module.css'
+import profile from '../../../assets/images/profile-image.svg'
 
 const index = () => {
   return (
     <>
       <aside className={styles.aside}>
         <div className='d-flex'>
-          <img className={styles.imgProfile} src="../../asset/profile-image.svg" alt="profile" />
+          <img className={styles.imgProfile} src={profile} alt="profile" />
           <div className={styles.detailProfile}>
             <span className={styles.nameProfile}>Mark</span>
             <Link to={''} className={styles.editProfile}>

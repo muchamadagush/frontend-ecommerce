@@ -74,4 +74,15 @@
   .buy {
     margin: unset;
   }
+
+  .bigShort {
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .bigLong {
+    height: 30px;
+    width: 160px;
+  }
 }

@@ -1,10 +1,8 @@
-import { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
-export default class Login extends Component {
-  render() {
-    return (
-      <>
+const Login = () => {
+  return (
+    <>
         <h5>Please login with your account</h5>
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -31,6 +29,7 @@ export default class Login extends Component {
 
         <h5 class="ask">Don't have a Blanja account?<a href="../Register/register.html"> Register</a></h5>
       </>
-    )
-  }
+  )
 }
+
+export default Login

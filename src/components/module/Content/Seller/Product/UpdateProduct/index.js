@@ -8,7 +8,8 @@ import { API_URL } from '../../../../../../api';
 
 const UpdateProduct = ({ categories, colors }) => {
   const { id } = useParams()
-  // const [product, setProduct] = useState(initialState)
+  const productId = id
+  
   const [formUpload, setFormUpload] = useState({
     categoryId: 0,
     title: '',
@@ -23,7 +24,7 @@ const UpdateProduct = ({ categories, colors }) => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}products/${id}`)
+      .get(`${API_URL}products/${productId}`)
       .then((res) => {
         setFormUpload({
           categoryId: res.data.data[0].category_id,
@@ -41,7 +42,7 @@ const UpdateProduct = ({ categories, colors }) => {
       .catch((error) => {
         alert('Internal server error')
       })
-  }, [])
+  }, [productId])
 
   const handleChange = (e) => {
     e.preventDefault();

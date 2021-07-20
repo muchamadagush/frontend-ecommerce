@@ -308,7 +308,8 @@ const Product = () => {
                       title={product.title}
                       price={'Rp ' + product.price}
                       store="Zalora Cloth"
-                      myClass="text-truncate d-inline"
+                      myClass="text-truncate"
+                      pClass="d-inline"
                     />
                   </Link>
                 </div>

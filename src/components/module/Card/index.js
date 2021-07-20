@@ -1,7 +1,7 @@
 import styles from './card.module.css'
 import star from '../../../assets/images/Star.svg'
 
-const index = ({ image, title, price, store, myClass}) => {
+const index = ({ image, title, price, store, myClass, pClass}) => {
   return (
     <>
       <div className="card card-md-5">
@@ -9,7 +9,7 @@ const index = ({ image, title, price, store, myClass}) => {
           <img src={image} className={styles.image} alt="" />
         </div>
         <div className={`card-body  ${myClass}`}>
-          <p className={`${styles.title}`}>{title}</p>
+          <p className={`${styles.title} ${pClass}`}>{title}</p>
           <ul className={styles.list}>
             <li className={styles.price}>{price}</li>
             <li className={styles.store}>{store}</li>

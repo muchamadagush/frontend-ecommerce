@@ -38,10 +38,10 @@ return (
           </select>
           <label className={`d-block ${styles.label}`}>Type</label>
           <div className="d-flex">
-            <Input type="radio" name="type" myOwnClass="form-check-input p-0" value="new" actionChange={handleInput} /> <span className={`ms-2 ${styles.label}`}>Baru</span>
+            <Input type="radio" name="type" myOwnClass="form-check-input p-0" value="new" actionChange={handleInput} /> <span className={`ms-2 mt-0 ${styles.label}`}>Baru</span>
           </div>
           <div className="d-flex">
-            <Input myOwnClass="form-check-input p-0" type="radio" name="type" value="second" actionChange={handleInput} /> <span className={`ms-2 ${styles.label}`}>Bekas</span>
+            <Input myOwnClass="form-check-input p-0" type="radio" name="type" value="second" actionChange={handleInput} /> <span className={`ms-2 mt-0 ${styles.label}`}>Bekas</span>
           </div>
         </div>
 
@@ -55,7 +55,7 @@ return (
         <div className={styles.description}>
           <h5 className={styles.title}>Description</h5>
           <hr />
-          <textarea name="description" id="description" cols="30" rows="10" onChange={handleInput}></textarea>
+          <textarea name="description" id="description" className="form-control" cols="30" rows="10" onChange={handleInput}></textarea>
         </div>
 
         <div className="button-submit">

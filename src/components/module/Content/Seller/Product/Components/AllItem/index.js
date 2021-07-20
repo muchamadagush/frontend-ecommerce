@@ -9,7 +9,7 @@ import { API_URL } from "../../../../../../../api";
 const AllItem = ({ handleDelete }) => {
   const [products, setProducts] = useState([])
   const [totalPage, setTotalPage] = useState(0)
-  const [perPage, setPerPage] = useState(1)
+  const [perPage, setPerPage] = useState(5)
   const [page, setPage] = useState(1)
   const [sortData, setSortData] = useState({
     orderBy: '',
@@ -57,26 +57,26 @@ const AllItem = ({ handleDelete }) => {
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
-            <th>
+            <th className={styles.tableHeader}>
               <Link aria-valuetext="title" onClick={handleSort}>
                 Product name
               </Link>
             </th>
-            <th>
+            <th className={styles.tableHeader}>
               <Link aria-valuetext="price" onClick={handleSort}>
                 Price
               </Link>
             </th>
-            <th>
+            <th className={styles.tableHeader}>
               <Link aria-valuetext="stock" onClick={handleSort}>
                 Stock
               </Link>
             </th>
             <th>
-              <select class="form-select form-select-sm" aria-label="Default select example" onChange={handlePerPage}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+              <select className="form-select form-select-sm" aria-label="Default select example" onChange={handlePerPage}>
+                <option value="5" checked>5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
               </select>
             </th>
           </tr>
@@ -105,7 +105,7 @@ const AllItem = ({ handleDelete }) => {
                         <td>{item.stock}</td>
                         <td>{item.price}</td>
                         <td>
-                          <Link to={`/seller/update/${item.id}`} products={products}>Edit</Link>
+                          <Link to={`/seller/update/${item.id}`} products={products} className="btn btn-warning btn-sm">Edit</Link>
                           <Button clickAction={() => { if (window.confirm('Delete the item?')) { handleDelete(item.id) }; }} title="Delete" />
                         </td>
                       </tr>

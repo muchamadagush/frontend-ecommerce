@@ -1,5 +1,4 @@
 import styles from "./seller.module.css";
-import Navbar from "../../../components/module/Navbar";
 import Aside from "../../../components/module/Aside";
 import Store from "../../../components/module/Content/Seller/Store";
 import MyProduct from "../../../components/module/Content/Seller/Product/MyProduct";
@@ -10,8 +9,13 @@ import { API_URL } from "../../../api/index";
 import { Redirect, useLocation, useParams } from "react-router-dom";
 import Order from "../../../components/module/Content/Seller/Order";
 import UpdateProduct from "../../../components/module/Content/Seller/Product/UpdateProduct";
+import Navbar from "../../../components/module/Navbar/Core";
+import Brand from "../../../components/module/Navbar/Brand";
+import Toggler from "../../../components/module/Navbar/Toggler";
+import NavRight from "../../../components/module/Navbar/NavRight";
+import Account from "../../../components/module/Navbar/Account";
 
-const Seller = () => {
+const Seller = (props) => {
   const { id } = useParams()
   const [categories, setCategories] = useState([]);
   const [colors, setColors] = useState([])
@@ -58,8 +62,6 @@ const Seller = () => {
       .catch((error) => {
         console.log(error)
       })
-
-    window.location.reload();
   }
 
   const handleChangeInput = (e) => {
@@ -81,6 +83,8 @@ const Seller = () => {
       .catch((error) => {
         alert(error)
       })
+
+    props.history.push(`/seller/products`)
   };
 
   const handleUpdateProduct = (e) => {
@@ -97,7 +101,14 @@ const Seller = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar>
+        <Brand />
+        <Toggler>
+          <NavRight>
+            <Account role={'/seller'} />
+          </NavRight>
+        </Toggler>
+      </Navbar>
 
       <div className="row">
         <div className={`col-md-3 ${styles.paddingTopBody}`}>

@@ -1,5 +1,6 @@
 import Button from '../../../../base/Button'
 import styles from './store.module.css'
+import profile from '../../../../../assets/images/profile-image.svg'
 
 const Store = () => {
   return (
@@ -47,7 +48,7 @@ const Store = () => {
             </div>
 
             <div className={`col-md-4 ${styles.right} flex flex-column`}>
-              <img className={styles.chooseImage} src="../../asset/profile-image.svg" alt="choosedImage" />
+              <img className={styles.chooseImage} src={profile} alt="choosedImage" />
               <Button type="button" title="Select Image" myClass="selectImage" />
             </div>
           </div>

@@ -6,7 +6,7 @@ body {
 
 @font-face {
   font-family: Metropolis;
-  src: url('./assets/fonts/Metropolis_Font_Family_(Fontmirror)/Metropolis-Regular 400.otf');
+  src: url("./assets/fonts/Metropolis_Font_Family_(Fontmirror)/Metropolis-Regular 400.otf");
 }
 
 .tab.active {
@@ -20,8 +20,8 @@ body {
 }
 
 .img-slider {
-  width: 450px !important;
-  height: 180px;
+  width: 350px !important;
+  height: 130px;
   margin: 0 5px;
 }
 
@@ -32,9 +32,33 @@ body {
   border-radius: 10px;
 }
 
+ol.breadcrumb {
+  margin: unset;
+}
+
+ol.breadcrumb li, ol.breadcrumb li a {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9b9b9b;
+  text-decoration: none;
+}
+
+.form-check-input:checked {
+  background-color: #db3022 !important;
+  border-color: #db3022 !important;
+}
+
 @media (max-width: 576px) {
   .img-slider {
     height: 90px;
     width: 225px !important;
+  }
+
+  nav.breadcrumb {
+    margin-top: 90px;
+    margin-bottom: 10px;
   }
 }

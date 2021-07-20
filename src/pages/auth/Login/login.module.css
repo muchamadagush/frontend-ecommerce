@@ -1,0 +1,174 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  text-decoration: none;
+}
+
+.logo h1 {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #db3022;
+  padding-top: 10px;
+}
+
+.logo img {
+  margin-right: 7px;
+}
+
+main {
+  text-align: center;
+}
+
+.role {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+main .role a {
+  width: 123px;
+  height: 48px;
+  padding: unset;
+  margin: unset;
+  border-style: unset;
+  border: 1px solid #9b9b9b;
+  background: transparent;
+  cursor: pointer;
+  color: #9b9b9b;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .role a.customer {
+  border-right: unset;
+  border-radius: 4px 0 0 4px;
+}
+
+main .role a.seller {
+  border-left: unset;
+  border-radius: 0 4px 4px 0;
+}
+
+main .role a:hover {
+  background-color: #db3022;
+  color: #fff;
+}
+
+main .role a.active {
+  background-color: #db3022;
+  color: #fff;
+}
+
+main .form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+main .form input {
+  width: 400px;
+  height: 48px;
+  box-sizing: border-box;
+  padding-left: 23px;
+  border-radius: 4px;
+  border: 1px solid #9b9b9b;
+}
+
+main .form input[type="email"] {
+  margin-bottom: 16px;
+}
+
+.form a {
+  text-align: end;
+  margin: 26px 0;
+  text-decoration: none;
+  color: #db3022;
+  font-size: 14px;
+}
+
+button.submit {
+  cursor: pointer;
+  background: #db3022;
+  border: unset;
+  width: 400px;
+  height: 48px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+  margin: 40px 0 50px;
+}
+
+.ask {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #222222;
+}
+
+.ask a {
+  color: #db3022;
+  text-decoration: none;
+}
+
+@media (max-width: 576px) {
+  h5 {
+    font-size: 14px;
+    margin: 20px 0 30px;
+  }
+
+  .role a {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .form {
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  input {
+    height: 40px;
+    width: 300px;
+  }
+
+  .form a {
+    margin: 20px 0 20px auto;
+  }
+
+  .submit {
+    width: 300px;
+    height: 40px;
+  }
+
+  .ask {
+    font-size: 12px;
+  }
+}

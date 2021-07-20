@@ -51,6 +51,12 @@ ol.breadcrumb li, ol.breadcrumb li a {
   border-color: #db3022 !important;
 }
 
+.nav-pills .nav-link.active {
+  background-color: #db3022 !important;
+  color: #fff !important;
+  border-radius: unset;
+}
+
 @media (max-width: 576px) {
   .img-slider {
     height: 90px;

@@ -6,6 +6,14 @@
   height: 100%;
 }
 
+.login {
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -18,13 +26,11 @@
 
 .logo h1 {
   font-size: 28px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 20px;
   letter-spacing: 0em;
   text-align: center;
   color: #db3022;
-  padding-top: 10px;
+  padding-top: 18px;
 }
 
 .logo img {
@@ -35,35 +41,31 @@ main {
   text-align: center;
 }
 
-.role {
+.roles {
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
+  border: 1px solid #9b9b9b;
 }
 
-main .role a {
+.role {
   width: 123px;
   height: 48px;
-  padding: unset;
-  margin: unset;
-  border-style: unset;
-  border: 1px solid #9b9b9b;
   background: transparent;
-  cursor: pointer;
-  color: #9b9b9b;
+  color: #9b9b9b !important;
   text-decoration: none;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
 }
 
-main .role a.customer {
+.customer {
   border-right: unset;
   border-radius: 4px 0 0 4px;
 }
 
-main .role a.seller {
+.seller {
   border-left: unset;
   border-radius: 0 4px 4px 0;
 }
@@ -78,13 +80,13 @@ main .role a.active {
   color: #fff;
 }
 
-main .form {
+.form {
   display: flex;
   flex-direction: column;
   margin-top: 40px;
 }
 
-main .form input {
+.form input {
   width: 400px;
   height: 48px;
   box-sizing: border-box;
@@ -93,7 +95,7 @@ main .form input {
   border: 1px solid #9b9b9b;
 }
 
-main .form input[type="email"] {
+.form input[type="email"] {
   margin-bottom: 16px;
 }
 
@@ -105,7 +107,11 @@ main .form input[type="email"] {
   font-size: 14px;
 }
 
-button.submit {
+.form a:hover {
+  color: #db3022;
+}
+
+.submit {
   cursor: pointer;
   background: #db3022;
   border: unset;
@@ -117,14 +123,14 @@ button.submit {
   color: #fff;
 }
 
-h5 {
+.login h5 {
   font-size: 18px;
   line-height: 18px;
   font-weight: 700;
   margin: 40px 0 50px;
 }
 
-.ask {
+.login h5.ask {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -132,13 +138,13 @@ h5 {
   color: #222222;
 }
 
-.ask a {
+.login h5.ask a {
   color: #db3022;
   text-decoration: none;
 }
 
 @media (max-width: 576px) {
-  h5 {
+  .login h5 {
     font-size: 14px;
     margin: 20px 0 30px;
   }
@@ -154,7 +160,7 @@ h5 {
     align-items: center;
   }
 
-  input {
+  .form input {
     height: 40px;
     width: 300px;
   }
@@ -168,7 +174,7 @@ h5 {
     height: 40px;
   }
 
-  .ask {
+  .login h5.ask {
     font-size: 12px;
   }
 }

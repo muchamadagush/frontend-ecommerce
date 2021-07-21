@@ -1,0 +1,179 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.register {
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  text-decoration: none;
+}
+
+.logo h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #db3022;
+  padding-top: 18px;
+}
+
+.logo img {
+  margin-right: 7px;
+}
+
+.roles {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #9b9b9b;
+}
+
+.role {
+  width: 123px;
+  height: 48px;
+  background: transparent;
+  color: #9b9b9b !important;
+  text-decoration: none;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer {
+  border-right: unset;
+  border-radius: 4px 0 0 4px;
+}
+
+.seller {
+  border-left: unset;
+  border-radius: 0 4px 4px 0;
+}
+
+main .role a:hover {
+  background-color: #db3022;
+  color: #fff;
+}
+
+main .role a.active {
+  background-color: #db3022;
+  color: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.form input {
+  width: 400px;
+  height: 48px;
+  box-sizing: border-box;
+  padding-left: 23px;
+  border-radius: 4px;
+  border: 1px solid #9b9b9b;
+}
+
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="password"],
+.form input[type="email"] {
+  margin-bottom: 16px;
+}
+
+.form a {
+  text-align: end;
+  margin: 26px 0;
+  text-decoration: none;
+  color: #db3022;
+  font-size: 14px;
+}
+
+.form a:hover {
+  color: #db3022;
+}
+
+.submit {
+  cursor: pointer;
+  background: #db3022;
+  border: unset;
+  width: 400px;
+  height: 48px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.register h5 {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+  margin: 40px 0 50px;
+}
+
+.register h5.ask {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #222222;
+}
+
+.register h5.ask a {
+  color: #db3022;
+  text-decoration: none;
+}
+
+@media (max-width: 576px) {
+  .register h5 {
+    font-size: 14px;
+    margin: 20px 0 30px;
+  }
+
+  .register a {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .form {
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  .form input {
+    height: 40px;
+    width: 300px;
+  }
+
+  .form a {
+    margin: 20px 0 20px auto;
+  }
+
+  .submit {
+    width: 300px;
+    height: 40px;
+  }
+
+  .register h5.ask {
+    font-size: 12px;
+  }
+}

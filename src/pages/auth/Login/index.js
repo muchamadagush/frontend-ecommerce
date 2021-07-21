@@ -34,7 +34,7 @@ export default class Login extends Component {
                 <input type="email" name="email" placeholder="Email" required />
                 <input type="password" name="email" placeholder="Password" required />
                 <Link href="../Reset_Password/reset.html">Forgot password?</Link>
-                <Button title='Login' class="submit" myClass='login' />
+                <Button title='Login' myClass='login' />
               </form>
             </div>
             <div className="tab-pane fade show active" id="pills-seller" role="tabpanel" aria-labelledby="pills-seller-tab">
@@ -42,7 +42,7 @@ export default class Login extends Component {
                 <input type="email" name="email" placeholder="Email" required />
                 <input type="password" name="email" placeholder="Password" required />
                 <Link href="../Reset_Password/reset.html">Forgot password?</Link>
-                <Button title='Login' class="submit" myClass='login' />
+                <Button title='Login' myClass='login' />
               </form>
             </div>
           </div>

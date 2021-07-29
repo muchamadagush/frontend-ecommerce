@@ -2,7 +2,6 @@ import styles from "./home.module.css";
 import Card from "../../components/module/Card"
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios"
-import { API_URL } from "../../api/index"
 import Slider from "react-slick";
 import qs from 'query-string'
 import image1 from '../../assets/images/1.png'
@@ -26,7 +25,7 @@ const Home = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}products/?search=${q}`)
+      .get(`${process.env.REACT_APP_API_URL}v1/products/?search=${q}`)
       .then((response) => {
         const products = response.data.data
         setProducts(products)
@@ -36,7 +35,7 @@ const Home = (props) => {
       })
 
     axios
-      .get(`${API_URL}category`)
+      .get(`${process.env.REACT_APP_API_URL}v1/category`)
       .then((response) => {
         const categories = response.data.data
         setCategories(categories)
@@ -142,7 +141,7 @@ const Home = (props) => {
               <Slider {...categorySlider}>
                 {/* <div className={styles.imgSlider}> */}
                 {categories && categories.map((item, index) => (
-                  <img key={index} className={styles.sliderImage} src={`${API_URL}files/${item.image}`} alt={item.title} />
+                  <img key={index} className={styles.sliderImage} src={`${process.env.REACT_APP_API_URL}files/${item.image}`} alt={item.title} />
                 ))}
                 {/* </div> */}
               </Slider>
@@ -156,7 +155,7 @@ const Home = (props) => {
                   <div key={index} className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                     <Link className={styles.link} to={`product/${product.id}`}>
                       <Card
-                        image={product.mainImage}
+                        image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}
                         title={product.title.substring(0, 35)}
                         price={'Rp ' + product.price}
                         store="Zalora Cloth"
@@ -175,7 +174,7 @@ const Home = (props) => {
                   <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                     <Link className={styles.link} to="product/id" key={index}>
                       <Card
-                        image={product.mainImage}
+                        image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}
                         title={product.title.substring(0, 35)}
                         price={'Rp ' + product.price}
                         store="Zalora Cloth"
@@ -195,7 +194,7 @@ const Home = (props) => {
                 <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                   <Link className={styles.link} to="product/id" key={index}>
                     <Card
-                      image={product.mainImage}
+                      image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}
                       title={product.title.substring(0, 35)}
                       price={'$ ' + product.price}
                       store="Zalora Cloth"

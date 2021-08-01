@@ -1,12 +1,11 @@
 import styles from "./seller.module.css";
+import { useEffect, useState } from "react";
+import { Route, Switch, useLocation, useParams } from "react-router-dom";
 import Aside from "../../../components/module/Aside";
 import Store from "../../../components/module/Content/Seller/Store";
 import MyProduct from "../../../components/module/Content/Seller/Product/MyProduct";
 import SellingProduct from "../../../components/module/Content/Seller/Product/SellingProduct";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../../api/index";
-import { Redirect, useLocation, useParams } from "react-router-dom";
 import Order from "../../../components/module/Content/Seller/Order";
 import UpdateProduct from "../../../components/module/Content/Seller/Product/UpdateProduct";
 import Navbar from "../../../components/module/Navbar/Core";
@@ -35,7 +34,7 @@ const Seller = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}category`)
+      .get(`${process.env.REACT_APP_API_URL}v1/category`)
       .then((response) => {
         setCategories(response.data.data);
       })
@@ -44,7 +43,7 @@ const Seller = (props) => {
       });
 
     axios
-      .get(`${API_URL}colors`)
+      .get(`${process.env.REACT_APP_API_URL}v1/colors`)
       .then((response) => {
         setColors(response.data.data)
       })
@@ -55,7 +54,7 @@ const Seller = (props) => {
 
   const handleDeleteProduct = (id) => {
     axios
-      .delete(`${API_URL}products/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}v1/products/${id}`)
       .then(() => {
         alert('Successfully delete item!')
       })
@@ -75,28 +74,26 @@ const Seller = (props) => {
   const handleUploadProduct = (e) => {
     e.preventDefault();
     axios
-      .post(`${API_URL}products`, formUpload)
+      .post(`${process.env.REACT_APP_API_URL}products`, formUpload)
       .then(() => {
         alert("Successfully create product!")
-        return  <Redirect  to="/seller/products" />
       })
       .catch((error) => {
         alert(error)
       })
-
-    props.history.push(`/seller/products`)
   };
 
   const handleUpdateProduct = (e) => {
     e.preventDefault();
     axios
-      .put(`${API_URL}products/${id}`, formUpload)
+      .put(`${process.env.REACT_APP_API_URL}products/${id}`, formUpload)
       .then(() => {
-        alert("Successfully create product!")
+        alert("Successfully update product!")
       })
       .catch((error) => {
         alert(error)
       })
+    props.history.push(`/seller/products`)
   }
 
   return (
@@ -105,7 +102,7 @@ const Seller = (props) => {
         <Brand />
         <Toggler>
           <NavRight>
-            <Account role={'/seller'} />
+            <Account />
           </NavRight>
         </Toggler>
       </Navbar>
@@ -116,26 +113,14 @@ const Seller = (props) => {
         </div>
 
         <div className={`col-md-9 ${styles.content}`}>
-          {url === '/seller' ?
-          <Store /> :
-          url === '/seller/products' ?
-          <MyProduct
-            handleDelete={handleDeleteProduct} /> :
-          url === '/seller/add-product' ?
-          <SellingProduct
-            handleInput={handleChangeInput}
-            handleSubmit={handleUploadProduct}
-            categories={categories}
-            colors={colors} /> :
-          url === '/seller/orders' ?
-          <Order /> : 
-          <UpdateProduct
-          handleSubmitUpdate={handleUpdateProduct}
-          handleInput={handleChangeInput}
-          categories={categories}
-          colors={colors}
-          />
-          }
+          <Switch>
+            <Route path='/seller/store' component={Store} />
+            <Route path='/seller/products' component={MyProduct} />
+            <Route path='/seller/add-product' component={SellingProduct} />
+            <Route path='/seller/orders' component={Order} />
+            <Route path='/seller/update/:id' component={UpdateProduct} />
+            <Route>404 Not Found</Route>
+          </Switch>
         </div>
       </div>
     </>

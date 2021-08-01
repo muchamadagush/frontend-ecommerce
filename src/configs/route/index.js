@@ -12,17 +12,13 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/product/:id" component={Product} />
+        <Route path="/product/:id" component={Product} />
         <Route path="/carts" component={Carts} />
         <Route path="/checkout" component={Checkout} />
-        <Route exact path="/seller" component={Seller} />
-        <Route path="/seller/update/:id" component={Seller} />
-        <Route path="/seller/products" component={Seller} />
-        <Route path="/seller/orders" component={Seller} />
-        <Route path="/seller/cancel" component={Seller} />
-        <Route path="/seller/add-product" component={Seller} />
+        <Route path="/seller" component={Seller} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route>404 Not Found</Route>
       </Switch>
     </BrowserRouter>
   )

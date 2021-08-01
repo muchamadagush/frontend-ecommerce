@@ -12,3 +12,8 @@ export const setProducts = (products) => {
     payload: products
   }
 }
+
+export const fetchProduct = (id) => async (dispatch) => {
+  const response = await blanjaApi.get(`v1/products/${id}`)
+  dispatch({ type: actionTypes.FETCH_PRODUCT, payload: response.data.data })
+}

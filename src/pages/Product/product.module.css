@@ -24,7 +24,7 @@
 }
 
 .ps {
-  padding-left: 3rem;
+  padding-left: 3rem !important;
 }
 
 .title {
@@ -257,7 +257,7 @@
   }
 
   .ps {
-    padding-left: 12px;
+    padding-left: 12px !important;
   }
 
   .title {

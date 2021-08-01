@@ -1,6 +1,5 @@
 import styles from './product.module.css'
 import axios from "axios"
-import { API_URL } from "../../api/index"
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import star from '../../assets/images/Star.svg'
@@ -13,12 +12,14 @@ import Filter from "../../components/module/Navbar/Filter";
 import NavRight from "../../components/module/Navbar/NavRight";
 import Cart from "../../components/module/Navbar/Cart";
 import Auth from "../../components/module/Navbar/Auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../configs/redux/actions/productAction';
 
 
 const Product = () => {
   const { id } = useParams();
+  const dispatch = useDispatch()
 
-  const [product, setProduct] = useState([])
   const [products, setProducts] = useState([])
   const [categoryId, setCategoryId] = useState()
   const [qty, setQty] = useState(1)
@@ -27,40 +28,12 @@ const Product = () => {
   const [category, setCategory] = useState('')
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}products/${id}`)
-      .then((response) => {
-        const product = response.data.data
-        const thisCategoryId = product[0].category_id
-        setProduct(product)
-        setCategoryId(thisCategoryId)
-        axios
-          .get(`${API_URL}products/category/${thisCategoryId}`)
-          .then((response) => {
-            const products = response.data.data
-            setProducts(products)
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-
-        axios
-          .get(`${API_URL}category/${thisCategoryId}`)
-          .then((response) => {
-            const category = response.data.data[0].title
-            console.log(category)
-            setCategory(category)
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
+    dispatch(fetchProduct(id))
     window.scrollTo(0, 0)
   }, [id])
+
+  const { product } = useSelector(state => state.products)
+  console.log(product)
 
   const handleAddToCart = () => {
     const data = {
@@ -72,7 +45,7 @@ const Product = () => {
     }
 
     axios
-      .post(`${API_URL}orders`, data)
+      .post(`${process.env.REACT_APP_API_URL}v1/orders`, data)
       .then((response) => {
         alert(response.data.message)
       })
@@ -114,11 +87,11 @@ const Product = () => {
             <>
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12">
-                  <img className={styles.mainImage} src={item.mainImage} alt="baju" />
+                  <img className={styles.mainImage} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="baju" />
 
                   <div class={styles.allProduct}>
                     {item.image && item.image.map((img) => (
-                      <img className={styles.secondaryImage} src={img.image} alt="product" />
+                      <img className={styles.secondaryImage} src={`${process.env.REACT_APP_API_URL}files/${img}`} alt="product" />
                     ))}
                   </div>
                 </div>
@@ -304,7 +277,7 @@ const Product = () => {
                 <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                   <Link className={styles.link} to={`${product.id}`}>
                     <Card
-                      image={product.mainImage}
+                      image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}
                       title={product.title}
                       price={'Rp ' + product.price}
                       store="Zalora Cloth"

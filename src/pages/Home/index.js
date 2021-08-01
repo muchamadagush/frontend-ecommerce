@@ -1,7 +1,6 @@
 import styles from "./home.module.css";
 import Card from "../../components/module/Card"
 import { Link, useLocation } from "react-router-dom";
-import axios from "axios"
 import Slider from "react-slick";
 import qs from 'query-string'
 import image1 from '../../assets/images/1.png'
@@ -13,37 +12,23 @@ import Filter from "../../components/module/Navbar/Filter";
 import NavRight from "../../components/module/Navbar/NavRight";
 import Cart from "../../components/module/Navbar/Cart";
 import Auth from "../../components/module/Navbar/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../configs/redux/actions/productAction";
 
 const Home = (props) => {
-  const [products, setProducts] = useState([])
+  const products = useSelector(state => state)
+  const dispatch = useDispatch()
+  
   const [categories, setCategories] = useState([])
   const [query, setQuery] = useState('')
-
+  
   const { search } = useLocation()
   const data = qs.parse(search)
   const q = data.search || ''
-
+  
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}v1/products/?search=${q}`)
-      .then((response) => {
-        const products = response.data.data
-        setProducts(products)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
-    axios
-      .get(`${process.env.REACT_APP_API_URL}v1/category`)
-      .then((response) => {
-        const categories = response.data.data
-        setCategories(categories)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, [q])
+    dispatch(fetchProducts())
+  }, [])
 
   const categorySlider = {
     dots: true,
@@ -100,6 +85,8 @@ const Home = (props) => {
     props.history.push(`/?search=${query}`)
   }
 
+  const email = useSelector(state => state.email)
+
   return (
     <>
       <Navbar>
@@ -146,6 +133,8 @@ const Home = (props) => {
                 {/* </div> */}
               </Slider>
             </div>
+
+            <h1>{email}</h1>
 
             <div className="mt-5">
               <h3 className={styles.title}>New</h3>

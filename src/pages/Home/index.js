@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../configs/redux/actions/productAction";
 
 const Home = (props) => {
-  const products = useSelector(state => state)
   const dispatch = useDispatch()
   
   const [categories, setCategories] = useState([])
@@ -85,7 +84,8 @@ const Home = (props) => {
     props.history.push(`/?search=${query}`)
   }
 
-  const email = useSelector(state => state.email)
+  const products = useSelector(state => state.products.products)
+  console.log(products)
 
   return (
     <>
@@ -133,8 +133,6 @@ const Home = (props) => {
                 {/* </div> */}
               </Slider>
             </div>
-
-            <h1>{email}</h1>
 
             <div className="mt-5">
               <h3 className={styles.title}>New</h3>

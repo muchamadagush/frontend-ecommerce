@@ -1,7 +1,7 @@
 import { actionTypes } from "../contants/actionTypes";
 
 const initialState = {
-  products : []
+  products: []
 }
 
 const productReducer = (state = initialState, action) => {
@@ -11,7 +11,12 @@ const productReducer = (state = initialState, action) => {
         ...state,
         products: action.payload
       }
-  
+    case actionTypes.SET_PRODUCTS:
+      return {
+        ...state,
+      }
+
+
     default:
       return state
   }

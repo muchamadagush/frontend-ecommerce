@@ -1,5 +1,9 @@
 export const actionTypes = {
+  // Products
   FETCH_PRODUCTS : "FETCH_PRODUCTS",
   SET_PRODUCTS: "SET_PRODUCTS",
-  FETCH_PRODUCT: "FETCH_PRODUCT"
+  FETCH_PRODUCT: "FETCH_PRODUCT",
+
+  // Categories
+  FETCH_CATEGORY : "FETCH_CATEGORY"
 }

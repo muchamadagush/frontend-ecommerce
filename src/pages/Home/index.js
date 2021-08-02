@@ -85,7 +85,6 @@ const Home = (props) => {
   }
 
   const products = useSelector(state => state.products.products)
-  console.log(products)
 
   return (
     <>

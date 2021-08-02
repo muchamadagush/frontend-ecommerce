@@ -42,3 +42,10 @@ form {
 hr {
   margin: 1rem 0 !important;
 }
+
+.error {
+  padding: 7px 15px;
+  background-color: red;
+  color: #fff;
+  font-size: 12px;
+}

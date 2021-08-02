@@ -16,8 +16,6 @@ import Account from "../../../components/module/Navbar/Account";
 
 const Seller = (props) => {
   const { id } = useParams()
-  const [categories, setCategories] = useState([]);
-  const [colors, setColors] = useState([])
   const [formUpload, setFormUpload] = useState({
     title: "",
     price: 0,
@@ -31,26 +29,6 @@ const Seller = (props) => {
 
   const location = useLocation()
   const url = location.pathname
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}v1/category`)
-      .then((response) => {
-        setCategories(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    axios
-      .get(`${process.env.REACT_APP_API_URL}v1/colors`)
-      .then((response) => {
-        setColors(response.data.data)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, []);
 
   const handleDeleteProduct = (id) => {
     axios

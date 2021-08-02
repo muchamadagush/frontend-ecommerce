@@ -6,10 +6,13 @@ export const fetchProducts = () => async (dispatch) => {
   dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data })
 }
 
-export const setProducts = (products) => {
-  return {
-    type: actionTypes.SET_PRODUCTS,
-    payload: products
+export const setProducts = (data) => async (dispacth) => {
+  try {
+    await blanjaApi.post(`v1/products`, data)
+    dispacth({ type: actionTypes.SET_PRODUCTS })
+    return "Successfully create product"
+  } catch (error) {
+    return error
   }
 }
 

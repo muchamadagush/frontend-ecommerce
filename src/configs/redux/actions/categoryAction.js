@@ -3,7 +3,9 @@ import { actionTypes } from "../contants/actionTypes"
 
 export const fetchCategory = (id) => async (dispatch) => {
   const response = await blanjaApi.get(`v1/category/${id}`)
-  dispatch({ type: actionTypes.FETCH_CATEGORY, payload: response.data })
+  dispatch({ type: actionTypes.FETCH_CATEGORY, payload: response.data.data })
+  const categoryId = response.data.data[0].id
+  return categoryId
 }
 
 export const fetchCategories = () => async (dispatch) => {

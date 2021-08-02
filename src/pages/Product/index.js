@@ -14,28 +14,29 @@ import Cart from "../../components/module/Navbar/Cart";
 import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct, fetchProductByCategory } from '../../configs/redux/actions/productAction';
+import { fetchCategory } from '../../configs/redux/actions/categoryAction';
 
 
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch()
 
-  const [categoryId, setCategoryId] = useState()
   const [qty, setQty] = useState(1)
   const [size, setSize] = useState(28)
   const [color, setColor] = useState('')
-  const [category, setCategory] = useState('')
-  
+
   useEffect(() => {
     dispatch(fetchProduct(id))
-    .then((res) => dispatch(fetchProductByCategory(res)))
+      .then((res) =>
+        dispatch(fetchCategory(res))
+          .then((res) => dispatch(fetchProductByCategory(res))))
 
     window.scrollTo(0, 0)
   }, [id, dispatch])
-  
-  const { product } = useSelector(state => state.products)
-  const products = useSelector(state => state.products.productByCategory)
-  
+
+  const { product, productByCategory } = useSelector(state => state.products)
+  const { category } = useSelector(state => state.categories)
+
   const handleAddToCart = () => {
     const data = {
       productId: parseInt(id),
@@ -72,15 +73,17 @@ const Product = () => {
 
         {/* breadcrumb */}
         <nav class={`breadcrumb ${styles.breadcrumbs}`} aria-label="breadcrumb">
-          <ol class={`breadcrumb ${styles.breadcrumb}`}>
-            <li class="breadcrumb-item">
-              <Link className={styles.navBreadcrumb} to={'/'}>Home</Link>
-            </li>
-            <li class="breadcrumb-item">
-              <Link className={styles.navBreadcrumb} to={`/producs/${categoryId}`}>category</Link>
-            </li>
-            <li className={`breadcrumb-item active ${styles.navBreadcrumb}`} aria-current="page">{category}</li>
-          </ol>
+          {category && category.map((item) => (
+            <ol class={`breadcrumb ${styles.breadcrumb}`}>
+              <li class="breadcrumb-item">
+                <Link className={styles.navBreadcrumb} to={'/'}>Home</Link>
+              </li>
+              <li class="breadcrumb-item">
+                <Link className={styles.navBreadcrumb} to={`/producs/category/${item.id}`}>category</Link>
+              </li>
+              <li className={`breadcrumb-item active ${styles.navBreadcrumb}`} aria-current="page">{item.title}</li>
+            </ol>
+          ))}
         </nav>
 
         <div>
@@ -274,7 +277,7 @@ const Product = () => {
             <h3 className={`${styles.title} mb-4`}>You can also like this</h3>
             <span>You’ve never seen it before!</span>
             <div className="row row-cols-2">
-              {products && products.map((product) => (
+              {productByCategory && productByCategory.map((product) => (
                 <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                   <Link className={styles.link} to={`${product.id}`}>
                     <Card

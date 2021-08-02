@@ -13,28 +13,29 @@ import NavRight from "../../components/module/Navbar/NavRight";
 import Cart from "../../components/module/Navbar/Cart";
 import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProduct } from '../../configs/redux/actions/productAction';
+import { fetchProduct, fetchProductByCategory } from '../../configs/redux/actions/productAction';
 
 
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch()
 
-  const [products, setProducts] = useState([])
   const [categoryId, setCategoryId] = useState()
   const [qty, setQty] = useState(1)
   const [size, setSize] = useState(28)
   const [color, setColor] = useState('')
   const [category, setCategory] = useState('')
-
+  
   useEffect(() => {
     dispatch(fetchProduct(id))
+    .then((res) => dispatch(fetchProductByCategory(res)))
+
     window.scrollTo(0, 0)
-  }, [id])
-
+  }, [id, dispatch])
+  
   const { product } = useSelector(state => state.products)
-  console.log(product)
-
+  const products = useSelector(state => state.products.productByCategory)
+  
   const handleAddToCart = () => {
     const data = {
       productId: parseInt(id),

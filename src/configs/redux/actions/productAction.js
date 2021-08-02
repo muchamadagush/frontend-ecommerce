@@ -16,4 +16,11 @@ export const setProducts = (products) => {
 export const fetchProduct = (id) => async (dispatch) => {
   const response = await blanjaApi.get(`v1/products/${id}`)
   dispatch({ type: actionTypes.FETCH_PRODUCT, payload: response.data.data })
+  const categoryId = response.data.data[0].category_id
+  return categoryId
+}
+
+export const fetchProductByCategory = (categoryId) => async (dispatch) => {
+  const response = await blanjaApi.get(`v1/products/category/${categoryId}`)
+  dispatch({ type: actionTypes.FETCH_PRODUCT_BY_CATEGORY, payload: response.data.data })
 }

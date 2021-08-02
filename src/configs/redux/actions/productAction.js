@@ -3,7 +3,7 @@ import { actionTypes } from "../contants/actionTypes"
 
 export const fetchProducts = () => async (dispatch) => {
   const response = await blanjaApi.get("v1/products")
-  dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data })
+  dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data.data })
 }
 
 export const setProducts = (data) => async (dispacth) => {
@@ -26,4 +26,14 @@ export const fetchProduct = (id) => async (dispatch) => {
 export const fetchProductByCategory = (categoryId) => async (dispatch) => {
   const response = await blanjaApi.get(`v1/products/category/${categoryId}`)
   dispatch({ type: actionTypes.FETCH_PRODUCT_BY_CATEGORY, payload: response.data.data })
+}
+
+export const deleteProduct = (id) => async (dispacth) => {
+  try {
+    await blanjaApi.delete(`v1/products/${id}`)
+    dispacth({ type: actionTypes.DELETE_PRODUCT })
+    return 'Successfully delete item!'
+  } catch (error) {
+    return error
+  }
 }

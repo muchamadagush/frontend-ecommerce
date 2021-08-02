@@ -27,40 +27,6 @@ const Seller = (props) => {
     color: ''
   });
 
-  const location = useLocation()
-  const url = location.pathname
-
-  const handleDeleteProduct = (id) => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}v1/products/${id}`)
-      .then(() => {
-        alert('Successfully delete item!')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const handleChangeInput = (e) => {
-    e.preventDefault();
-    setFormUpload({
-      ...formUpload,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleUploadProduct = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}products`, formUpload)
-      .then(() => {
-        alert("Successfully create product!")
-      })
-      .catch((error) => {
-        alert(error)
-      })
-  };
-
   const handleUpdateProduct = (e) => {
     e.preventDefault();
     axios

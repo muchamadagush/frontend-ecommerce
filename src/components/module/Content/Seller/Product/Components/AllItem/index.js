@@ -5,75 +5,93 @@ import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../../../../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, fetchProducts } from "../../../../../../../configs/redux/actions/productAction";
+import blanjaApi from "../../../../../../../configs/api/blanjaApi";
 
-const AllItem = ({ handleDelete }) => {
-  const [products, setProducts] = useState([])
-  const [totalPage, setTotalPage] = useState(0)
-  const [perPage, setPerPage] = useState(5)
-  const [page, setPage] = useState(1)
-  const [sortData, setSortData] = useState({
-    orderBy: '',
-    sort: ''
-  })
+const AllItem = () => {
+  const dispatch = useDispatch()
+  const [success, setSuccess] = useState("")
+  // const [totalPage, setTotalPage] = useState(0)
+  // const [perPage, setPerPage] = useState(5)
+  // const [page, setPage] = useState(1)
+  // const [sortData, setSortData] = useState({
+  //   orderBy: '',
+  //   sort: ''
+  // })
+
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id))
+    .then((res) => setSuccess(res),
+    (err) => alert(err))
+  }
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}products?page=${page}&perPage=${perPage}&orderBy=${sortData.orderBy}&sortBy=${sortData.sort}`)
-      .then((response) => {
-        setTotalPage(response.data.totalPage)
-        setProducts(response.data.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    dispatch(fetchProducts())
+  }, [dispatch, handleDelete])
 
-  }, [page, perPage, sortData])
 
-  const handleChangePage = (e) => {
-    setPage(e.selected + 1)
-  }
+  const { products } = useSelector(state => state.products)
 
-  const handlePerPage = (e) => {
-    setPerPage(e.target.value)
-  }
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API_URL}products?page=${page}&perPage=${perPage}&orderBy=${sortData.orderBy}&sortBy=${sortData.sort}`)
+  //     .then((response) => {
+  //       setTotalPage(response.data.totalPage)
+  //       setProducts(response.data.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
 
-  const handleSort = (e) => {
-    if (sortData.sort === 'DESC') {
-      setSortData({
-        orderBy: e.target.ariaValueText,
-        sort: 'ASC'
-      })
-    } else {
-      setSortData({
-        orderBy: e.target.ariaValueText,
-        sort: 'DESC'
-      })
-    }
-  }
+  // }, [page, perPage, sortData])
+
+  // const handleChangePage = (e) => {
+  //   setPage(e.selected + 1)
+  // }
+
+  // const handlePerPage = (e) => {
+  //   setPerPage(e.target.value)
+  // }
+
+  // const handleSort = (e) => {
+  //   if (sortData.sort === 'DESC') {
+  //     setSortData({
+  //       orderBy: e.target.ariaValueText,
+  //       sort: 'ASC'
+  //     })
+  //   } else {
+  //     setSortData({
+  //       orderBy: e.target.ariaValueText,
+  //       sort: 'DESC'
+  //     })
+  //   }
+  // }
   
 
   return (
     <>
+      {success.length ? <p className={styles.success}>{success}</p> : ''}
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
             <th className={styles.tableHeader}>
-              <Link aria-valuetext="title" onClick={handleSort}>
+              <Link aria-valuetext="title" class='newClass'>
                 Product name
               </Link>
             </th>
             <th className={styles.tableHeader}>
-              <Link aria-valuetext="price" onClick={handleSort}>
+              <Link aria-valuetext="price">
                 Price
               </Link>
             </th>
             <th className={styles.tableHeader}>
-              <Link aria-valuetext="stock" onClick={handleSort}>
+              <Link aria-valuetext="stock">
                 Stock
               </Link>
             </th>
             <th>
-              <select className="form-select form-select-sm" aria-label="Default select example" onChange={handlePerPage}>
+              <select className="form-select form-select-sm" aria-label="Default select example">
                 <option value="5" checked>5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
@@ -106,7 +124,7 @@ const AllItem = ({ handleDelete }) => {
                         <td>{item.price}</td>
                         <td>
                           <Link to={`/seller/update/${item.id}`} products={products} className="btn btn-warning btn-sm">Edit</Link>
-                          <Button clickAction={() => { if (window.confirm('Delete the item?')) { handleDelete(item.id) }; }} title="Delete" />
+                          <Button myClass='delete' clickAction={() => { if (window.confirm('Delete the item?')) { handleDelete(item.id) }; }} title="Delete" />
                         </td>
                       </tr>
                     ))}
@@ -114,7 +132,7 @@ const AllItem = ({ handleDelete }) => {
               </table>
             </td>
           </tr>
-          <ReactPaginate
+          {/* <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}
             breakLabel={"..."}
@@ -124,7 +142,7 @@ const AllItem = ({ handleDelete }) => {
             containerClassName={"pagination"}
             subContainerClassName={"pages-pagination"}
             activeClassName={"active"}
-            onPageChange={handleChangePage} />
+            onPageChange={handleChangePage} /> */}
         </tbody>
       </table>
     </>

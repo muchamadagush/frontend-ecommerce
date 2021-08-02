@@ -2,6 +2,7 @@ import { actionTypes } from "../contants/actionTypes";
 
 const initialState = {
   category: [],
+  categories: []
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         category: action.payload
+      }
+    case actionTypes.FETCH_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
       }
     default:
       return state

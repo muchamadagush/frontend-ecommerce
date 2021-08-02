@@ -14,19 +14,19 @@ import Cart from "../../components/module/Navbar/Cart";
 import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../configs/redux/actions/productAction";
+import { fetchCategories } from "../../configs/redux/actions/categoryAction";
 
 const Home = (props) => {
   const dispatch = useDispatch()
-  
-  const [categories, setCategories] = useState([])
   const [query, setQuery] = useState('')
-  
+
   const { search } = useLocation()
   const data = qs.parse(search)
   const q = data.search || ''
-  
+
   useEffect(() => {
     dispatch(fetchProducts())
+    dispatch(fetchCategories())
   }, [])
 
   const categorySlider = {
@@ -85,6 +85,7 @@ const Home = (props) => {
   }
 
   const products = useSelector(state => state.products.products)
+  const categories = useSelector(state => state.categories.categories)
 
   return (
     <>

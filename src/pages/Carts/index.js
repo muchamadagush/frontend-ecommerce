@@ -3,19 +3,14 @@ import axios from "axios";
 import { API_URL } from "../../api/index"
 import styles from "./cart.module.css"
 import { Link } from "react-router-dom";
-import Navbar from "../../components/module/Navbar/Core";
 import Button from "../../components/base/Button";
-import Brand from "../../components/module/Navbar/Brand";
-import Toggler from "../../components/module/Navbar/Toggler";
-import Filter from "../../components/module/Navbar/Filter";
-import NavRight from "../../components/module/Navbar/NavRight";
-import Cart from "../../components/module/Navbar/Cart";
-import Account from "../../components/module/Navbar/Account";
+import Nav from "../../components/module/Navbar";
+import { useSelector } from "react-redux";
 
 const Carts = () => {
-
+  const { profile } = useSelector(state => state.user)
   const [carts, setCarts] = useState([])
-  const userId = 7
+  const userId = profile.id
 
   useEffect(() => {
     axios
@@ -35,16 +30,7 @@ const Carts = () => {
 
   return (
     <>
-      <Navbar>
-        <Brand />
-        <Toggler>
-          <Filter />
-          <NavRight>
-            <Cart />
-            <Account />
-          </NavRight>
-        </Toggler>
-      </Navbar>
+      <Nav />
 
       <div className={`container ${styles.marginTopBody}`}>
           <form onSubmit={handleSubmit}>
@@ -102,7 +88,7 @@ const Carts = () => {
                     </span>
                   </div>
 
-                  <p>$ {item.price * item.qty}</p>
+                  <p>Rp {item.price * item.qty}</p>
                 </div>
                 ))}
               </div>

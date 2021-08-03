@@ -5,7 +5,7 @@ import profile from '../../../../assets/images/profile-image.svg'
 const Account = ({ role }) => {
   return (
     <>
-      <li className="nav-item">
+      <li className="nav-item ms-3">
         <Link className="nav-link" href="#">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@ const Account = ({ role }) => {
         </svg>
         </Link>
       </li>
-      <li className="nav-item ms-4">
+      <li className="nav-item ms-3">
         <Link className="nav-link" href="#">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -29,8 +29,8 @@ const Account = ({ role }) => {
         </svg>
         </Link>
       </li>
-      <li className="nav-item ms-4">
-        <Link className="nav-link" to={role}>
+      <li className="nav-item ms-3">
+        <Link className="nav-link" to={role === 1 ? '/seller/store' : '/profile'}>
           <img className={styles.profile} src={profile} alt="profile" />
         </Link>
       </li>

@@ -15,6 +15,7 @@ import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../configs/redux/actions/productAction";
 import { fetchCategories } from "../../configs/redux/actions/categoryAction";
+import Nav from "../../components/module/Navbar";
 
 const Home = (props) => {
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(fetchProducts())
     dispatch(fetchCategories())
-  }, [])
+  }, [dispatch])
 
   const categorySlider = {
     dots: true,
@@ -89,18 +90,7 @@ const Home = (props) => {
 
   return (
     <>
-      <Navbar>
-        <Brand />
-        <Toggler>
-          <Filter
-            handleInputSearch={handleInputSearch}
-            handleSearch={handleSearch} />
-          <NavRight>
-            <Cart />
-            <Auth />
-          </NavRight>
-        </Toggler>
-      </Navbar>
+      <Nav handleInputSearch={handleInputSearch} handleSearch={handleSearch} />
 
       <div className={`container ${styles.marginTopBody}`}>
         {q === '' ?

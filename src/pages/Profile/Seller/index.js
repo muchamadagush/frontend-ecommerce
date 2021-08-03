@@ -1,55 +1,17 @@
 import styles from "./seller.module.css";
-import { useEffect, useState } from "react";
-import { Route, Switch, useLocation, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Aside from "../../../components/module/Aside";
 import Store from "../../../components/module/Content/Seller/Store";
 import MyProduct from "../../../components/module/Content/Seller/Product/MyProduct";
 import SellingProduct from "../../../components/module/Content/Seller/Product/SellingProduct";
-import axios from "axios";
 import Order from "../../../components/module/Content/Seller/Order";
 import UpdateProduct from "../../../components/module/Content/Seller/Product/UpdateProduct";
-import Navbar from "../../../components/module/Navbar/Core";
-import Brand from "../../../components/module/Navbar/Brand";
-import Toggler from "../../../components/module/Navbar/Toggler";
-import NavRight from "../../../components/module/Navbar/NavRight";
-import Account from "../../../components/module/Navbar/Account";
+import Nav from "../../../components/module/Navbar";
 
-const Seller = (props) => {
-  const { id } = useParams()
-  const [formUpload, setFormUpload] = useState({
-    title: "",
-    price: 0,
-    stock: 0,
-    type: "",
-    mainImage: "",
-    description: "",
-    categoryId: 0,
-    color: ''
-  });
-
-  const handleUpdateProduct = (e) => {
-    e.preventDefault();
-    axios
-      .put(`${process.env.REACT_APP_API_URL}products/${id}`, formUpload)
-      .then(() => {
-        alert("Successfully update product!")
-      })
-      .catch((error) => {
-        alert(error)
-      })
-    props.history.push(`/seller/products`)
-  }
-
+const Seller = () => {
   return (
     <>
-      <Navbar>
-        <Brand />
-        <Toggler>
-          <NavRight>
-            <Account />
-          </NavRight>
-        </Toggler>
-      </Navbar>
+      <Nav />
 
       <div className="row">
         <div className={`col-md-3 ${styles.paddingTopBody}`}>

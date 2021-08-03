@@ -19,7 +19,7 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
-s
+
   onSubmit(e) {
     e.preventDefault()
     const history = this.props.history
@@ -154,7 +154,6 @@ s
 
 Login.propTypes = {
   login: PropTypes.func,
-  router: PropTypes.object
 }
 
 export default connect(null, { login })(Login)

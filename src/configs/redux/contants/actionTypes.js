@@ -8,5 +8,8 @@ export const actionTypes = {
 
   // Categories
   FETCH_CATEGORY : "FETCH_CATEGORY",
-  FETCH_CATEGORIES : "FETCH_CATEGORIES"
+  FETCH_CATEGORIES : "FETCH_CATEGORIES",
+
+  // Users
+  SET_USER : "SET_USER",
 }

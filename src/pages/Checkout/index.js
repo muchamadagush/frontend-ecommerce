@@ -1,8 +1,32 @@
 import styles from "./checkout.module.css";
 import Button from "../../components/base/Button";
 import Nav from "../../components/module/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchOrders, updateStatusOrder } from "../../configs/redux/actions/orderAction";
+import ModalPayment from "../../components/base/Modal/ModalPayment";
+import ButtonModal from "../../components/base/ButtonModal";
+import { useHistory } from "react-router-dom";
 
 const Checkout = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const userId = user.id
+
+  useEffect(() => {
+    dispatch(fetchOrders(userId))
+  }, [dispatch, userId])
+
+  const { orders, orderdetails } = useSelector(state => state.orders)
+
+  const handlePayment = (id) => {
+    const data = {
+      status: "ordered"
+    }
+    dispatch(updateStatusOrder(id, data, history))
+      .then((res) => dispatch(fetchOrders(userId)))
+  }
   return (
     <>
       <Nav />
@@ -21,37 +45,44 @@ const Checkout = () => {
               </span>
               <Button type="button" title="Choose another address" myClass="chooseAddress" />
             </div>
-            <div className={styles.item}>
-              <div className={styles.images}>
-                <img className={styles.image} src="../asset/image product.jpg" alt="" />
+            {orderdetails && orderdetails.map((item, index) => (
+              <div className={styles.item} key={index}>
+                <div className={styles.images}>
+                  <img className={styles.image} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="" />
+                </div>
+                <div>
+                  <h5 className={styles.productTitle}>{item.title}</h5>
+                  <span className={styles.productStore}>Zalora Cloth</span>
+                </div>
+                <p className={styles.productPrice}>Rp {item.price * item.qty}</p>
               </div>
-              <div>
-                <h5 className={styles.productTitle}>Men's formal suit - Black</h5>
-                <span className={styles.productStore}>Zalora Cloth</span>
-              </div>
-              <p className={styles.productPrice}>$ 20.0</p>
-            </div>
+            ))}
           </div>
 
-          <div className={`col-md-4 ${styles.right}`} >
-            <h5 className={styles.shippingTitle}>Shopping summary</h5>
-            <div className={styles.subTotal}>
-              <span className={styles.subTitle}>Order</span>
-              <span class="price">$ 40.0</span>
-            </div>
-            <div className={styles.subTotal}>
-              <span className={styles.subTitle}>Delivery</span>
-              <span class="price">$ 5.0</span>
-            </div>
-            <hr />
-            <div className={styles.subTotal}>
+          {orders && orders.map((item, index) => (
+            <div className={`col-md-4 ${styles.right}`} key={index}>
               <h5 className={styles.shippingTitle}>Shopping summary</h5>
-              <span className={styles.priceTotal}>$ 45.0</span>
+              <div className={styles.subTotal}>
+                <span className={styles.subTitle}>Order</span>
+                <span class="price">Rp {item.subTotal}</span>
+              </div>
+              <div className={styles.subTotal}>
+                <span className={styles.subTitle}>Delivery</span>
+                <span class="price">Rp 0</span>
+              </div>
+              <hr />
+              <div className={styles.subTotal}>
+                <h5 className={styles.shippingTitle}>Shopping summary</h5>
+                <span className={styles.priceTotal}>Rp {item.subTotal}</span>
+              </div>
+              <ButtonModal target="#exampleModalToggle" label="Select Payment" ownClass="payment" />
             </div>
-            <Button type="button" title="Select Payment" myClass="payment" />
-          </div>
+          ))}
         </div>
       </div>
+      {orders && orders.map((item) => (
+        <ModalPayment handlePayment={() => handlePayment(item.id)} subTotal={item.subTotal} />
+      ))}
     </>
   );
 };

@@ -13,4 +13,10 @@ export const actionTypes = {
 
   // Users
   SET_USER : "SET_USER",
+
+  // Orders
+  SET_ORDER : "SET_ORDER",
+  FETCH_ORDERS : "FETCH_ORDERS",
+  UPDATE_QTY : "UPDATE_QTY",
+  UPDATE_STATUS : "UPDATE_STATUS"
 }

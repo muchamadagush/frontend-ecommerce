@@ -19,8 +19,8 @@ export const setProducts = (data) => async (dispacth) => {
 export const fetchProduct = (id) => async (dispatch) => {
   const response = await blanjaApi.get(`v1/products/${id}`)
   dispatch({ type: actionTypes.FETCH_PRODUCT, payload: response.data.data })
-  const categoryId = response.data.data[0].category_id
-  return categoryId
+  const data = response.data.data[0]
+  return data
 }
 
 export const fetchProductByCategory = (categoryId) => async (dispatch) => {
@@ -35,5 +35,16 @@ export const deleteProduct = (id) => async (dispacth) => {
     return 'Successfully delete item!'
   } catch (error) {
     return error
+  }
+}
+
+export const updateProduct = (id, data, history) => async (dispacth) => {
+  try {
+    const response = await blanjaApi.put(`v1/products/${id}`, data)
+    dispacth({ type: actionTypes.UPDATE_PRODUCT, payload: response.data.data })
+    history.push('/seller/products')
+    return 'Successfully update item!'
+  } catch (error) {
+    return error.response.data
   }
 }

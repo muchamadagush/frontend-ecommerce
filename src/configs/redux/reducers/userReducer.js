@@ -1,5 +1,6 @@
 const initialState = {
   profile: {},
+  avatar: "https://images.macrumors.com/t/XjzsIpBxeGphVqiWDqCzjDgY4Ck=/800x0/article-new/2019/04/guest-user-250x250.jpg",
   error: null
 }
 

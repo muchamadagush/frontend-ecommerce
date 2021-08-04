@@ -2,14 +2,20 @@ import styles from '../SellingProduct/sellingProduct.module.css'
 import Button from '../../../../../base/Button'
 import Input from '../../../../../base/Input'
 import { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL } from '../../../../../../api';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct, updateProduct } from '../../../../../../configs/redux/actions/productAction';
+import blanjaApi from '../../../../../../configs/api/blanjaApi';
+import { fetchCategories } from '../../../../../../configs/redux/actions/categoryAction';
+import InputCheckbox from '../../../../../base/InputCheckbox';
 
-const UpdateProduct = ({ categories, colors }) => {
+const UpdateProduct = () => {
   const { id } = useParams()
-  const productId = id
-  
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [colors, setColors] = useState([])
+  const [imgPreviews, setImgPreviews] = useState([])
   const [formUpload, setFormUpload] = useState({
     categoryId: 0,
     title: '',
@@ -18,31 +24,56 @@ const UpdateProduct = ({ categories, colors }) => {
     stock: 0,
     type: '',
     color: '',
-    mainImage: '',
+    image: [],
+    oldImage: [],
+    imagePreview: [],
     status: ''
   });
 
+  const setData = (data) => {
+    setFormUpload({
+      categoryId: data.category_id,
+      title: data.title,
+      description: data.description,
+      price: data.price,
+      stock: data.stock,
+      type: data.type,
+      color: data.color,
+      oldImage: data.image,
+      status: data.status,
+    })
+  }
+
   useEffect(() => {
-    axios
-      .get(`${API_URL}products/${productId}`)
-      .then((res) => {
-        setFormUpload({
-          categoryId: res.data.data[0].category_id,
-          title: res.data.data[0].title,
-          description: res.data.data[0].description,
-          price: res.data.data[0].price,
-          stock: res.data.data[0].stock,
-          type: res.data.data[0].type,
-          color: res.data.data[0].color,
-          mainImage: res.data.data[0].mainImage,
-          status: res.data.data[0].status
-        })
-        console.log(res.data.data[0])
+    dispatch(fetchProduct(id))
+      .then((res) => setData(res))
+    dispatch(fetchCategories())
+
+    blanjaApi
+      .get(`v1/colors`)
+      .then((response) => {
+        setColors(response.data.data);
       })
       .catch((error) => {
-        alert('Internal server error')
-      })
-  }, [productId])
+        console.log(error);
+      });
+  }, [id])
+
+  let imageViews = []
+  for (let i = 0; i < formUpload.oldImage.length; i++) {
+    imageViews.push(`${process.env.REACT_APP_API_URL}files/${formUpload.oldImage[i]}`)
+  }
+
+  const handleChangeFile = (e) => {
+    const files = [...e.target.files]
+    setFormUpload({
+      ...formUpload,
+      image: e.target.files,
+      imagePreview: files.map((item) => URL.createObjectURL(item))
+    })
+  }
+
+  const { categories } = useSelector(state => state.categories)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -54,20 +85,34 @@ const UpdateProduct = ({ categories, colors }) => {
 
   const handleSubmitUpdate = (e) => {
     e.preventDefault();
-    axios
-      .put(`${API_URL}products/${id}`, formUpload)
-      .then(() => {
-        alert('Successfully update data')
-        return <Redirect to="/seller/products" />
-      })
-      .catch((error) => {
-        alert('Internal server error')
-      })
+
+    const files = document.querySelector('input[type="file"]').files
+    const data = new FormData();
+    data.append('title', formUpload.title)
+    data.append('price', formUpload.price)
+    data.append('stock', formUpload.stock)
+    data.append('type', formUpload.type)
+    data.append('status', formUpload.status)
+    data.append('description', formUpload.description)
+    data.append('categoryId', formUpload.categoryId)
+    data.append('color', formUpload.color)
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        data.append('image', files[i])
+      };
+    } else {
+      for (let i = 0; i < formUpload.oldImage.length; i++) {
+        data.append('image', formUpload.oldImage[i])
+      };
+    }
+
+    dispatch(updateProduct(id, data, history))
   }
+
   return (
     <>
       <div className={styles.contentBody}>
-        <form onSubmit={handleSubmitUpdate}>
+        <form onSubmit={handleSubmitUpdate} enctype="multipart/form-data">
           <div className={styles.inventory}>
             <h5 className={styles.title}>Inventory</h5>
             <hr />
@@ -84,7 +129,7 @@ const UpdateProduct = ({ categories, colors }) => {
             <Input type="number" name="stock" id="stock" myOwnClass="form-control" value={formUpload.stock} actionChange={handleChange} />
             <label htmlFor="status" className={`d-block ${styles.label}`}>Status</label>
             <Input type="text" name="status" id="status" myOwnClass="form-control" value={formUpload.status} actionChange={handleChange} />
-            <label htmlFor="category" className={`d-block ${styles.label}`}>Category</label>
+            <label htmlFor="categoryId" className={`d-block ${styles.label}`}>Category</label>
             <select name="categoryId" class="form-select" aria-label="Default select example" value={formUpload.categoryId} onChange={handleChange}>
               <option selected>Choose category</option>
               {categories && categories.map((item, index) => (
@@ -101,10 +146,10 @@ const UpdateProduct = ({ categories, colors }) => {
             </select>
             <label className={`d-block ${styles.label}`}>Type</label>
             <div className="d-flex">
-              <Input type="radio" name="type" myOwnClass="form-check-input p-0" value="new" actionChange={handleChange} /> <span className={`ms-2 mt-0 ${styles.label}`}>Baru</span>
+              <InputCheckbox type="radio" name="type" value="new" handleChange={handleChange} isChecked={formUpload.type === "new" ? true : false} /> <span className={`ms-2 mt-0 ${styles.label}`}>Baru</span>
             </div>
             <div className="d-flex">
-              <Input myOwnClass="form-check-input p-0" type="radio" name="type" value="second" actionChange={handleChange} /> <span className={`ms-2 mt-0 ${styles.label}`}>Bekas</span>
+              <InputCheckbox type="radio" name="type" value="second" handleChange={handleChange} isChecked={formUpload.type === "second" ? true : false} /> <span className={`ms-2 mt-0 ${styles.label}`}>Bekas</span>
             </div>
           </div>
 
@@ -112,7 +157,22 @@ const UpdateProduct = ({ categories, colors }) => {
             <h5 className={styles.title}>Photo of goods</h5>
             <hr />
 
-            <Input type="text" name="mainImage" myOwnClass="form-control" value={formUpload.mainImage} actionChange={handleChange} />
+            {formUpload.imagePreview ? (
+              formUpload.imagePreview.map(item => (
+                <img src={item} key={item} alt="UploadedImage" className="img-thumbnail img-fluid uploaded-img mr-2" />
+              ))
+            ) : imageViews.map((item) => (
+              <img src={item} key={item} alt="UploadedImage" className="img-thumbnail img-fluid uploaded-img mr-2" />
+            ))}
+
+            <input
+              type="file"
+              name="image"
+              onChange={handleChangeFile}
+              accept="image/jpeg, image/png, image/jpg"
+              multiple
+            />
+
           </div>
 
           <div className={styles.description}>

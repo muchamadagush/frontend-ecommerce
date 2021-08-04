@@ -5,16 +5,10 @@ import { useEffect, useState } from 'react';
 import star from '../../assets/images/Star.svg'
 import Button from '../../components/base/Button';
 import Card from '../../components/module/Card';
-import Navbar from "../../components/module/Navbar/Core";
-import Brand from "../../components/module/Navbar/Brand";
-import Toggler from "../../components/module/Navbar/Toggler";
-import Filter from "../../components/module/Navbar/Filter";
-import NavRight from "../../components/module/Navbar/NavRight";
-import Cart from "../../components/module/Navbar/Cart";
-import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct, fetchProductByCategory } from '../../configs/redux/actions/productAction';
 import { fetchCategory } from '../../configs/redux/actions/categoryAction';
+import Nav from '../../components/module/Navbar';
 
 
 const Product = () => {
@@ -28,7 +22,7 @@ const Product = () => {
   useEffect(() => {
     dispatch(fetchProduct(id))
       .then((res) =>
-        dispatch(fetchCategory(res))
+        dispatch(fetchCategory(res.category_id))
           .then((res) => dispatch(fetchProductByCategory(res))))
 
     window.scrollTo(0, 0)
@@ -58,16 +52,7 @@ const Product = () => {
 
   return (
     <>
-      <Navbar>
-        <Brand />
-        <Toggler>
-          <Filter />
-          <NavRight>
-            <Cart />
-            <Auth />
-          </NavRight>
-        </Toggler>
-      </Navbar>
+      <Nav />
 
       <div className={`container ${styles.marginTopBody}`}>
 

@@ -48,3 +48,12 @@ export const updateStatusOrder = (id, data, history) => async (dispatch) => {
     return error.response
   }
 }
+
+export const fetchAllOrders = (userId) => async (dispatch) => {
+  try {
+    const response = await blanjaApi.get(`v1/orders/all/${userId}`)
+    dispatch({ type: actionTypes.FETCH_ORDERS_WHERE_USERID, payload: response.data.data})
+  } catch (error) {
+    return error.response
+  }
+}

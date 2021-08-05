@@ -1,5 +1,4 @@
 import styles from './product.module.css'
-import axios from "axios"
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import star from '../../assets/images/Star.svg'
@@ -8,12 +7,14 @@ import Card from '../../components/module/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct, fetchProductByCategory } from '../../configs/redux/actions/productAction';
 import { fetchCategory } from '../../configs/redux/actions/categoryAction';
+import { createOrder } from '../../configs/redux/actions/orderAction';
 import Nav from '../../components/module/Navbar';
-
+import jwt from "jwt-decode";
 
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch()
+  const user = jwt(localStorage.getItem('token'))
 
   const [qty, setQty] = useState(1)
   const [size, setSize] = useState(28)
@@ -34,20 +35,15 @@ const Product = () => {
   const handleAddToCart = () => {
     const data = {
       productId: parseInt(id),
-      userId: 7,
+      userId: user.id,
       size: size,
       color: color,
       qty: qty
     }
 
-    axios
-      .post(`${process.env.REACT_APP_API_URL}v1/orders`, data)
-      .then((response) => {
-        alert(response.data.message)
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+    dispatch(createOrder(data))
+    .then((res) => alert(res),
+    (err) => console.log(err))
   }
 
   return (
@@ -72,10 +68,10 @@ const Product = () => {
         </nav>
 
         <div>
-          {product && product.map((item) => (
+          {product && product.map((item, index) => (
             <>
-              <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12">
+              <div className="row" key={index}>
+                <div className="col-lg-4 col-md-4 col-sm-12">
                   <img className={styles.mainImage} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="baju" />
 
                   <div class={styles.allProduct}>
@@ -84,10 +80,10 @@ const Product = () => {
                     ))}
                   </div>
                 </div>
-                <div class={`col-lg-8 col-md-8 col-sm-12 d-flex flex-column ${styles.ps}`}>
+                <div className={`col-lg-8 col-md-8 col-sm-12 d-flex flex-column ${styles.ps}`}>
                   <h3 className={styles.title}>{item.title}</h3>
-                  <span class={styles.store}>Zalora Cloth</span>
-                  <span class={styles.rating}>
+                  <span className={styles.store}>Zalora Cloth</span>
+                  <span className={styles.rating}>
                     <img className={styles.star} src={star} alt="star" />
                     <img className={styles.star} src={star} alt="star" />
                     <img className={styles.star} src={star} alt="star" />
@@ -95,12 +91,12 @@ const Product = () => {
                     <img className={styles.star} src={star} alt="star" />
                     (10)
                   </span>
-                  <div class={styles.price}>
-                    <span class={styles.priceTitle}>Price</span>
-                    <span class={styles.priceValue}>$ {item.price}</span>
+                  <div className={styles.price}>
+                    <span className={styles.priceTitle}>Price</span>
+                    <span className={styles.priceValue}>$ {item.price}</span>
                   </div>
-                  <div class={styles.color}>
-                    <span class={styles.colorTitle}>Color</span>
+                  <div className={styles.color}>
+                    <span className={styles.colorTitle}>Color</span>
                     <span>
                       {/* {JSON.parse(item.color).map((col) => ( */}
                       <input className={`form-check-input ${styles[item.color]} ${styles.formCheck}`} type="radio" name="radioNoLabel" id="radioNoLabel1" value={item.color}
@@ -108,10 +104,10 @@ const Product = () => {
                       {/* ))} */}
                     </span>
                   </div>
-                  <div class={styles.qtyAndSize}>
-                    <div class={styles.size}>
-                      <span class={styles.sizeTitle}>Size</span>
-                      <div class={styles.count}>
+                  <div className={styles.qtyAndSize}>
+                    <div className={styles.size}>
+                      <span className={styles.sizeTitle}>Size</span>
+                      <div className={styles.count}>
                         <span onClick={() => setSize(size > 0 ? size - 1 : size)}>
                           <svg className={styles.countMinus} width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="18" cy="18" r="18" fill="#D4D4D4" />
@@ -140,9 +136,9 @@ const Product = () => {
                         </span>
                       </div>
                     </div>
-                    <div class={styles.qty}>
-                      <span class={styles.qtyTitle}>Jumlah</span>
-                      <div class={styles.counts}>
+                    <div className={styles.qty}>
+                      <span className={styles.qtyTitle}>Jumlah</span>
+                      <div className={styles.counts}>
                         <span onClick={() => setQty(qty > 0 ? qty - 1 : qty)}>
                           <svg className={styles.countMinus} width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="18" cy="18" r="18" fill="#D4D4D4" />
@@ -172,7 +168,7 @@ const Product = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="action-button">
+                  <div className="action-button">
                     <Button title="Chat" myClass="bigShort" />
                     <Button clickAction={handleAddToCart} title="Add Bag" myClass="bigShort" />
                     <Button title="Buy Now" myClass="bigLong" />
@@ -181,7 +177,7 @@ const Product = () => {
               </div>
               <div className="mt-5">
                 <h3 className={`${styles.title} mb-4`}>Informasi Produk</h3>
-                <div class="condition">
+                <div className="condition">
                   <h5 className={styles.detailTitle}>Condition</h5>
                   <span className={styles.detailDescription}>New</span>
                 </div>
@@ -195,10 +191,10 @@ const Product = () => {
 
           <div className="mt-4">
             <h3 className={`${styles.title} mb-4`}>Product Review</h3>
-            <div class="d-flex">
+            <div className="d-flex">
               <div className={styles.rates}>
                 <p className={styles.rateValue}>5.0<span>/10</span></p>
-                <div class="star">
+                <div className="star">
                   <img className={styles.bigStar} src={star} alt="star" />
                   <img className={styles.bigStar} src={star} alt="star" />
                   <img className={styles.bigStar} src={star} alt="star" />
@@ -206,51 +202,51 @@ const Product = () => {
                   <img className={styles.bigStar} src={star} alt="star" />
                 </div>
               </div>
-              <div class="grafik">
-                <div class="grafik-progres d-flex align-items-center">
+              <div className="grafik">
+                <div className="grafik-progres d-flex align-items-center">
                   <img className={`${styles.star} me-2`} src={star} alt="star" />
                   <span className="me-2">5</span>
                   <div className={`progress ${styles.progress}`}>
-                    <div class={`progress-bar w-100 ${styles.bgDanger}`} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <div className={`progress-bar w-100 ${styles.bgDanger}`} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
-                  <span class="value">4</span>
+                  <span className="value">4</span>
                 </div>
-                <div class="grafik-progres d-flex align-items-center">
+                <div className="grafik-progres d-flex align-items-center">
                   <img className={`${styles.star} me-2`} src={star} alt="star" />
                   <span className="me-2">4</span>
                   <div className={`progress ${styles.progress}`}>
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
-                  <span class="value">0</span>
+                  <span className="value">0</span>
                 </div>
-                <div class="grafik-progres d-flex align-items-center">
+                <div className="grafik-progres d-flex align-items-center">
                   <img className={`${styles.star} me-2`} src={star} alt="star" />
                   <span className="me-2">3</span>
                   <div className={`progress ${styles.progress}`}>
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
-                  <span class="value">0</span>
+                  <span className="value">0</span>
                 </div>
-                <div class="grafik-progres d-flex align-items-center">
+                <div className="grafik-progres d-flex align-items-center">
                   <img className={`${styles.star} me-2`} src={star} alt="star" />
                   <span className="me-2">2</span>
                   <div className={`progress ${styles.progress}`}>
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
-                  <span class="value">0</span>
+                  <span className="value">0</span>
                 </div>
-                <div class="grafik-progres d-flex align-items-center">
+                <div className="grafik-progres d-flex align-items-center">
                   <img className={`${styles.star} me-2`} src={star} alt="star" />
                   <span className="me-2">1</span>
                   <div className={`progress ${styles.progress}`}>
-                    <div class="progress-bar" role="progressbar">
+                    <div className="progress-bar" role="progressbar">
                     </div>
                   </div>
-                  <span class="value">0</span>
+                  <span className="value">0</span>
                 </div>
               </div>
             </div>
@@ -258,12 +254,12 @@ const Product = () => {
 
           <hr />
 
-          <div class="item">
+          <div className="item">
             <h3 className={`${styles.title} mb-4`}>You can also like this</h3>
             <span>You’ve never seen it before!</span>
             <div className="row row-cols-2">
-              {productByCategory && productByCategory.map((product) => (
-                <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
+              {productByCategory && productByCategory.map((product, index) => (
+                <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`} key={index}>
                   <Link className={styles.link} to={`${product.id}`}>
                     <Card
                       image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}

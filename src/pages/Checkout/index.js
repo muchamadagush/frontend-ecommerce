@@ -7,11 +7,12 @@ import { fetchOrders, updateStatusOrder } from "../../configs/redux/actions/orde
 import ModalPayment from "../../components/base/Modal/ModalPayment";
 import ButtonModal from "../../components/base/ButtonModal";
 import { useHistory } from "react-router-dom";
+import jwt from "jwt-decode"
 
 const Checkout = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = jwt(localStorage.getItem('token'))
   const userId = user.id
 
   useEffect(() => {

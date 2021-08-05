@@ -4,7 +4,8 @@ const initialState = {
   orderdetails: [],
   status: false,
   error: null,
-  orders: []
+  orders: [],
+  allItem: []
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -30,6 +31,11 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         status: action.payload
+      }
+    case actionTypes.FETCH_ORDERS_WHERE_USERID:
+      return {
+        ...state,
+        allItem: action.payload
       }
     default:
       return state

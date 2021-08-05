@@ -5,13 +5,6 @@ import Slider from "react-slick";
 import qs from 'query-string'
 import image1 from '../../assets/images/1.png'
 import React, { useEffect, useState } from 'react'
-import Navbar from "../../components/module/Navbar/Core";
-import Brand from "../../components/module/Navbar/Brand";
-import Toggler from "../../components/module/Navbar/Toggler";
-import Filter from "../../components/module/Navbar/Filter";
-import NavRight from "../../components/module/Navbar/NavRight";
-import Cart from "../../components/module/Navbar/Cart";
-import Auth from "../../components/module/Navbar/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../configs/redux/actions/productAction";
 import { fetchCategories } from "../../configs/redux/actions/categoryAction";
@@ -26,9 +19,10 @@ const Home = (props) => {
   const q = data.search || ''
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchProducts(q))
     dispatch(fetchCategories())
-  }, [dispatch])
+    console.log("jalan")
+  }, [dispatch, q])
 
   const categorySlider = {
     dots: true,
@@ -128,7 +122,7 @@ const Home = (props) => {
               <h3 className={styles.title}>New</h3>
               <h5 className={styles.description}>You’ve never seen it before!</h5>
               <div className="row row-cols-2">
-                {products && products.map((product, index) => (
+                {products.data && products.data.map((product, index) => (
                   <div key={index} className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                     <Link className={styles.link} to={`product/${product.id}`}>
                       <Card
@@ -147,7 +141,7 @@ const Home = (props) => {
               <h3 className={styles.title}>Popular</h3>
               <h5 className={styles.description}>Find clothes that are trending recently</h5>
               <div className="row row-cols-2">
-                {products && products.map((product, index) => (
+                {products.data && products.data.map((product, index) => (
                   <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                     <Link className={styles.link} to="product/id" key={index}>
                       <Card
@@ -167,7 +161,7 @@ const Home = (props) => {
             <h3 className={styles.title}>Hasil pencarian untuk "{q}"</h3>
             <h5 className={styles.description}>Find clothes that are trending recently</h5>
             <div className="row row-cols-2">
-              {products && products.map((product, index) => (
+              {products.data && products.data.map((product, index) => (
                 <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
                   <Link className={styles.link} to="product/id" key={index}>
                     <Card

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from './aside.module.css'
 import profile from '../../../assets/images/profile-image.svg'
 
-const index = () => {
+const Aside = () => {
   return (
     <>
       <aside className={styles.aside}>
@@ -24,7 +24,7 @@ const index = () => {
 
         <ul className={styles.menus}>
           <li class="nav-item mb-4">
-            <Link className={`{nav-link dropdown-toggle ${styles.toggles} ${styles.active}`} id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            <Link className={`{nav-link dropdown-toggle ${styles.toggles}`} id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               <div>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@ const index = () => {
             </Link>
             <ul class="dropdown-menu py-0" aria-labelledby="navbarDropdown">
               <li className="mb-0">
-                <Link to={'/seller'} class="dropdown-item active">Store profle</Link>
+                <Link to={'/seller/store'} class="dropdown-item">Store profle</Link>
               </li>
             </ul>
           </li>
@@ -92,4 +92,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Aside

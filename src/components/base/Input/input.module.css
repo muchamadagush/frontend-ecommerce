@@ -22,7 +22,16 @@
   outline: none;
 }
 
+.smallSearch {
+  height: 30px;
+  width: 200px;
+  margin-right: .5rem;
+  outline: none;
+  padding-left: 25px;
+}
+
 @media (max-width: 576px) {
+  .smallSearch,
   .search {
     height: 36px;
     width: 100%;

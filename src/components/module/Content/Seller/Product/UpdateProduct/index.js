@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import {  useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct, updateProduct } from '../../../../../../configs/redux/actions/productAction';
-import blanjaApi from '../../../../../../configs/api/blanjaApi';
 import { fetchCategories } from '../../../../../../configs/redux/actions/categoryAction';
+import { fetchColors } from '../../../../../../configs/redux/actions/colorAction';
 import InputCheckbox from '../../../../../base/InputCheckbox';
 
 const UpdateProduct = () => {
@@ -14,7 +14,6 @@ const UpdateProduct = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const [colors, setColors] = useState([])
   const [formUpload, setFormUpload] = useState({
     categoryId: 0,
     title: '',
@@ -47,15 +46,7 @@ const UpdateProduct = () => {
     dispatch(fetchProduct(id))
       .then((res) => setData(res))
     dispatch(fetchCategories())
-
-    blanjaApi
-      .get(`v1/colors`)
-      .then((response) => {
-        setColors(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchColors())
   }, [id, dispatch])
 
   let imageViews = []
@@ -73,6 +64,7 @@ const UpdateProduct = () => {
   }
 
   const { categories } = useSelector(state => state.categories)
+  const { colors } = useSelector(state => state.colors)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -104,7 +96,7 @@ const UpdateProduct = () => {
         data.append('image', formUpload.oldImage[i])
       };
     }
-
+console.log(data)
     dispatch(updateProduct(id, data, history))
   }
 

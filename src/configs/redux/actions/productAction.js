@@ -18,7 +18,7 @@ export const fetchProducts = (search, page, perPage, orderBy, sort) => async (di
     }
     const response = await blanjaApi.get(query)
     console.log(search, page, perPage, orderBy, sort)
-    
+
     dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data })
     return response.data.totalPage
 
@@ -30,7 +30,12 @@ export const fetchProducts = (search, page, perPage, orderBy, sort) => async (di
 
 export const setProducts = (data) => async (dispacth) => {
   try {
-    await blanjaApi.post(`v1/products`, data)
+    const token = localStorage.getItem("token")
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    await blanjaApi.post(`v1/products`, data, config)
     dispacth({ type: actionTypes.SET_PRODUCTS })
     return "Successfully create product"
   } catch (error) {
@@ -52,7 +57,12 @@ export const fetchProductByCategory = (categoryId) => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispacth) => {
   try {
-    await blanjaApi.delete(`v1/products/${id}`)
+    const token = localStorage.getItem("token")
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    await blanjaApi.delete(`v1/products/${id}`, config)
     dispacth({ type: actionTypes.DELETE_PRODUCT })
     return 'Successfully delete item!'
   } catch (error) {
@@ -62,7 +72,12 @@ export const deleteProduct = (id) => async (dispacth) => {
 
 export const updateProduct = (id, data, history) => async (dispacth) => {
   try {
-    const response = await blanjaApi.put(`v1/products/${id}`, data)
+    const token = localStorage.getItem("token")
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const response = await blanjaApi.put(`v1/products/${id}`, data, config)
     dispacth({ type: actionTypes.UPDATE_PRODUCT, payload: response.data.data })
     history.push('/seller/products')
     return 'Successfully update item!'

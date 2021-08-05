@@ -1,9 +1,31 @@
 import blanjaApi from "../../api/blanjaApi";
 import { actionTypes } from "../contants/actionTypes"
 
-export const fetchProducts = () => async (dispatch) => {
-  const response = await blanjaApi.get("v1/products")
-  dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data.data })
+export const fetchProducts = (search, page, perPage, orderBy, sort) => async (dispatch) => {
+  try {
+    let query = `v1/products?search=${search}`
+    if (page) {
+      query = query + `&page=${page}`
+    }
+    if (perPage) {
+      query = query + `&perPage=${perPage}`
+    }
+    if (orderBy) {
+      query = query + `&orderBy=${orderBy}`
+    }
+    if (sort) {
+      query = query + `&sortBy=${sort}`
+    }
+    const response = await blanjaApi.get(query)
+    console.log(search, page, perPage, orderBy, sort)
+    
+    dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data })
+    return response.data.totalPage
+
+  } catch (error) {
+    const data = []
+    dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: data })
+  }
 }
 
 export const setProducts = (data) => async (dispacth) => {
@@ -12,7 +34,7 @@ export const setProducts = (data) => async (dispacth) => {
     dispacth({ type: actionTypes.SET_PRODUCTS })
     return "Successfully create product"
   } catch (error) {
-    return error
+    return error.response.data.message
   }
 }
 
@@ -45,6 +67,7 @@ export const updateProduct = (id, data, history) => async (dispacth) => {
     history.push('/seller/products')
     return 'Successfully update item!'
   } catch (error) {
+    console.log(error.response.data)
     return error.response.data
   }
 }

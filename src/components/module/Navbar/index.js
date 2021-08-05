@@ -7,17 +7,21 @@ import Toggler from './Toggler'
 import NavRight from './NavRight'
 import Cart from './Cart'
 import Account from './Account'
+import jwt from 'jwt-decode'
 
 const Nav = ({ handleInputSearch, handleSearch }) => {
-  const { profile } = useSelector(state => state.user)
+  const dataUser = jwt(localStorage.getItem('token'))
+
+  const { status } = useSelector(state => state.orders)
+
   return (
     <>
-      {profile.role === 1 ? (
+      {dataUser.role === 1 ? (
         <Navbar>
           <Brand />
           <Toggler>
             <NavRight>
-              <Account role={profile.role} />
+              <Account role={dataUser.role} />
             </NavRight>
           </Toggler>
         </Navbar>
@@ -27,8 +31,8 @@ const Nav = ({ handleInputSearch, handleSearch }) => {
           <Toggler>
             <Filter handleInputSearch={handleInputSearch} handleSearch={handleSearch} />
             <NavRight>
-              <Cart />
-              <Account role={profile.role} />
+              <Cart orders={status} />
+              <Account role={dataUser.role} />
             </NavRight>
           </Toggler>
         </Navbar>

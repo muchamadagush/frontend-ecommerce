@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Cart = ({ orders }) => {
   return (
     <>
-      <li>
+      <li className="position-relative">
         <Link className="cart" to="/carts">
           <svg
             width="24"
@@ -41,6 +41,10 @@ const Cart = () => {
               </clipPath>
             </defs>
           </svg>
+          {orders === true  ? (
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+          </span>
+          ) : ''}
         </Link>
       </li>
     </>

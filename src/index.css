@@ -19,6 +19,10 @@ body {
   font-weight: bold;
 }
 
+.pagination li a {
+  margin: 5px;
+}
+
 .img-slider {
   width: 350px !important;
   height: 130px;
@@ -36,7 +40,8 @@ ol.breadcrumb {
   margin: unset;
 }
 
-ol.breadcrumb li, ol.breadcrumb li a {
+ol.breadcrumb li,
+ol.breadcrumb li a {
   font-family: Metropolis;
   font-style: normal;
   font-weight: 500;
@@ -46,7 +51,7 @@ ol.breadcrumb li, ol.breadcrumb li a {
   text-decoration: none;
 }
 
-.form-check-input:checked {
+.form-check-input.cart:checked {
   background-color: #db3022 !important;
   border-color: #db3022 !important;
 }
@@ -55,6 +60,149 @@ ol.breadcrumb li, ol.breadcrumb li a {
   background-color: #db3022 !important;
   color: #fff !important;
   border-radius: unset;
+}
+
+a#dropdownMenuButton1 {
+  background: unset;
+  border: unset;
+}
+
+a#dropdownMenuButton1:focus {
+  box-shadow: none;
+}
+
+/* Modal payment */
+.modal.show .modal-dialog {
+  display: flex;
+  justify-content: center;
+}
+
+.modal.show .modal-dialog .modal-content {
+  width: 810px;
+  height: 600px;
+}
+
+.modal-dialog .modal-content.payment .modal-header {
+  justify-content: flex-start;
+  padding: 15px;
+}
+
+.modal-content .modal-header .btn-close {
+  margin: 0;
+}
+
+.modal-content .modal-header .modal-title.filter {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 22px;
+  color: #222222;
+  margin-top: 2px;
+}
+
+.modal-dialog .modal-content.payment .modal-body {
+  padding: 15px;
+}
+
+.modal-body .shopping h5.title,
+.modal-body .payment-method h5.title {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #222222;
+}
+
+ul.list-payment {
+  padding-left: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #8e8e93;
+}
+
+li.list-item-payment {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+li.list-item-payment input.form-check-input {
+  border-radius: 4px;
+}
+
+li.list-item-payment input.form-check-input:checked {
+  background-color: #db3022;
+  border-color: #db3022;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+
+.modal-body .shopping h5.title, .modal-body .payment-method h5.title {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #222222;
+}
+
+.modal-body .shopping .sub-total {
+  display: flex;
+  justify-content: space-between;
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: #9b9b9b;
+  margin-bottom: 10px;
+}
+
+.modal-body .shopping .sub-total span.price {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  color: #222222;
+}
+
+.modal-content.payment .modal-footer {
+  justify-content: space-between;
+}
+
+.modal-footer .shop span.title {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #222222;
+}
+
+.modal-footer .shop span.total {
+  font-family: Metropolis;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #db3022;
+}
+
+.modal-content.payment .modal-footer button {
+  width: 160px;
+  height: 36px;
+  background-color: #db3022;
+  border: unset;
+  border-radius: 25px;
+}
+
+img.img-thumbnail.img-fluid.uploaded-img.mr-2 {
+  width: 200px;
+  height: 200px;
 }
 
 @media (max-width: 576px) {
@@ -66,5 +214,11 @@ ol.breadcrumb li, ol.breadcrumb li a {
   nav.breadcrumb {
     margin-top: 90px;
     margin-bottom: 10px;
+  }
+
+  /* Modal payment */
+  .modal-content.payment {
+    width: 450px;
+    height: 100%;
   }
 }

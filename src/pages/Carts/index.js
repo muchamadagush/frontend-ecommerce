@@ -5,11 +5,12 @@ import Button from "../../components/base/Button";
 import Nav from "../../components/module/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders, updateQtyOrder } from "../../configs/redux/actions/orderAction";
+import jwt from "jwt-decode";
 
 const Carts = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = jwt(localStorage.getItem('token'))
   const userId = user.id
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const Carts = () => {
             <div className={`col-md-8 ${styles.left}`}>
               <div className={styles.allItems}>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input class="form-check-input cart" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="form-check-label" for="flexCheckDefault">
                     Select all items <span>(2 items selected)</span>
                   </label>
@@ -60,7 +61,7 @@ const Carts = () => {
               {orderdetails && orderdetails.map((item, index) => (
                 <div className={styles.item} key={index}>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <input class="form-check-input cart" type="checkbox" value="" id="flexCheckDefault" />
                   </div>
                   <div className={styles.blockImage}>
                     <img className={styles.imgProduct} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="" />

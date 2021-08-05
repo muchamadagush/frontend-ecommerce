@@ -1,0 +1,61 @@
+.aside {
+  background: #fff;
+  padding-left: 100px;
+}
+
+.imgProfile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.detailProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.nameProfile {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222222;
+  margin-bottom: 5px;
+}
+
+.editProfile {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9b9b9b;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.editProfile:hover {
+  color: #9b9b9b;
+}
+
+/* Menu */
+.menus {
+  list-style: none;
+  padding: unset;
+}
+
+.toggles {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9b9b9b;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggles:hover,
+.toggles.active {
+  color: #000;
+}

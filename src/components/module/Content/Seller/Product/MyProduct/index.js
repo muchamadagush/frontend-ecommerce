@@ -1,7 +1,7 @@
 import { AllItem, Archived, SoldOut } from '../Components'
 import styles from './myProduct.module.css'
 
-const MyProduct = ({products, handleDelete}) => {
+const MyProduct = () => {
   return (
     <>
       <div className={styles.contentBody}>
@@ -21,15 +21,10 @@ const MyProduct = ({products, handleDelete}) => {
 
         <hr className="my-0" />
 
-        <form class="mt-3">
-          <img class="search" src="../../asset/Search Glyph.svg" alt="" />
-          <input type="search" name="search" id="search" placeholder="Search" />
-        </form>
-
         <div class="data mt-3">
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-all-item" role="tabpanel" aria-labelledby="pills-all-item-tab">
-              <AllItem products={products} handleDelete={handleDelete} />
+              <AllItem />
             </div>
             <div class="tab-pane fade" id="pills-sold-out" role="tabpanel" aria-labelledby="pills-sold-out-tab">
               <SoldOut />

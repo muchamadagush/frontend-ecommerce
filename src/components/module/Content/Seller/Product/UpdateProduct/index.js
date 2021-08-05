@@ -2,7 +2,7 @@ import styles from '../SellingProduct/sellingProduct.module.css'
 import Button from '../../../../../base/Button'
 import Input from '../../../../../base/Input'
 import { useEffect, useState } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import {  useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct, updateProduct } from '../../../../../../configs/redux/actions/productAction';
 import blanjaApi from '../../../../../../configs/api/blanjaApi';
@@ -15,7 +15,6 @@ const UpdateProduct = () => {
   const history = useHistory()
 
   const [colors, setColors] = useState([])
-  const [imgPreviews, setImgPreviews] = useState([])
   const [formUpload, setFormUpload] = useState({
     categoryId: 0,
     title: '',
@@ -57,7 +56,7 @@ const UpdateProduct = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [id])
+  }, [id, dispatch])
 
   let imageViews = []
   for (let i = 0; i < formUpload.oldImage.length; i++) {

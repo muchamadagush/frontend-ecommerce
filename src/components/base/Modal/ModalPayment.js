@@ -19,15 +19,15 @@ const ModalPayment = ({ handlePayment, subTotal }) => {
                 <ul class="list-payment">
                   <li class="list-item-payment">
                     <img src={gopay} alt="" />
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
+                    <input class="form-check-input cart" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
                   </li>
                   <li class="list-item-payment">
                     <img src={pos} alt="Pos" />
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
+                    <input class="form-check-input cart" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
                   </li>
                   <li class="list-item-payment">
                     <img src={mastercard} alt="" />
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
+                    <input class="form-check-input cart" type="radio" name="flexRadioDefault" id="flexRadioDefault10" />
                   </li>
                 </ul>
               </div>

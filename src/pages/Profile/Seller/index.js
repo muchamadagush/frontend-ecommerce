@@ -1,5 +1,5 @@
 import styles from "./seller.module.css";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Aside from "../../../components/module/Aside";
 import Store from "../../../components/module/Content/Seller/Store";
 import MyProduct from "../../../components/module/Content/Seller/Product/MyProduct";
@@ -25,7 +25,7 @@ const Seller = () => {
             <Route path='/seller/add-product' component={SellingProduct} />
             <Route path='/seller/orders' component={Order} />
             <Route path='/seller/update/:id' component={UpdateProduct} />
-            <Route>404 Not Found</Route>
+            <Route><Redirect to="/seller/store" /></Route>
           </Switch>
         </div>
       </div>

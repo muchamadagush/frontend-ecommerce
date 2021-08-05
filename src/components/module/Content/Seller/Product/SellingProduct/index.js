@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../../../../configs/redux/actions/categoryAction";
 import { useHistory } from "react-router-dom";
 import { setProducts } from "../../../../../../configs/redux/actions/productAction";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SellingProduct = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,7 @@ const SellingProduct = () => {
     dispatch(setProducts(data, history))
     .then(
       (res) => history.push('/seller/products'),
-      (err) => setError(err.response.data.message),
+      (err) => toast(err.response.data.message),
     )
     window.scrollTo(0, 0)
   };

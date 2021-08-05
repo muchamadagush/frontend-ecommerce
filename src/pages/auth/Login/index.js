@@ -13,7 +13,7 @@ class Login extends Component {
     this.state = {
       role: 1,
       email: '',
-      password: ''
+      password: '',
     }
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -126,7 +126,8 @@ class Login extends Component {
                   placeholder="Email"
                   value={email}
                   onChange={this.onChange}
-                  required />
+                  required
+                />
                 <input
                   type="password"
                   name="password"

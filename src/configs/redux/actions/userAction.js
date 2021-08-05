@@ -24,3 +24,14 @@ export const register = (data, history) => async (dispatch) => {
     alert(error.response.data.message)
   }
 }
+
+export const updateProfile = (id, data) => async (dispatch) => {
+  try {
+    const response = await blanjaApi.put(`v1/users/${id}`, data)
+    dispatch({ type: actionTypes.UPDATE_USER, payload: response })
+    return response
+  } catch (error) {
+    console.log(error.response)
+    return error
+  }
+}

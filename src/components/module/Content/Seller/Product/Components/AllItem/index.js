@@ -39,7 +39,7 @@ const AllItem = () => {
         },
         {
           label: 'No',
-          onClick: () => window.close()
+          onClick: () => alert('Click No')
         }
       ]
     });

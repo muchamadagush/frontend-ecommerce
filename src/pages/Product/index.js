@@ -10,6 +10,8 @@ import { fetchCategory } from '../../configs/redux/actions/categoryAction';
 import { createOrder } from '../../configs/redux/actions/orderAction';
 import Nav from '../../components/module/Navbar';
 import jwt from "jwt-decode";
+import { ToastContainer, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Product = () => {
   const { id } = useParams();
@@ -42,12 +44,11 @@ const Product = () => {
     }
 
     dispatch(createOrder(data))
-    .then((res) => alert(res),
-    (err) => console.log(err))
   }
 
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <Nav />
 
       <div className={`container ${styles.marginTopBody}`}>

@@ -1,14 +1,17 @@
 import blanjaApi from "../../api/blanjaApi";
 import { actionTypes } from "../contants/actionTypes";
+import { toast } from 'react-toastify'
 
 export const createOrder = (data) => async (dispatch) => {
   try {
     await blanjaApi.post(`v1/orders`, data)
     let status = true
     dispatch({ type: actionTypes.SET_ORDER, payload: status })
+    toast.success('Successfully create order!', { position: toast.POSITION.TOP_CENTER })
     return "Successfully create product"
   } catch (error) {
-    return error.response
+    toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
+    return error
   }
 }
 

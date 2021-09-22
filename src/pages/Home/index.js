@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import Slider from "react-slick";
 import qs from 'query-string'
 import image1 from '../../assets/images/1.png'
+import image2 from '../../assets/images/2.png'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../configs/redux/actions/productAction";
@@ -21,7 +22,6 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(fetchProducts(q))
     dispatch(fetchCategories())
-    console.log("jalan")
   }, [dispatch, q])
 
   const categorySlider = {
@@ -79,8 +79,8 @@ const Home = (props) => {
     props.history.push(`/?search=${query}`)
   }
 
-  const products = useSelector(state => state.products.products)
-  const categories = useSelector(state => state.categories.categories)
+  const { products } = useSelector(state => state.products)
+  const { categories } = useSelector(state => state.categories)
 
   return (
     <>
@@ -95,13 +95,13 @@ const Home = (props) => {
                   <img src={image1} alt="" />
                 </div>
                 <div class="img-slider">
-                  <img src={image1} alt="" />
+                  <img src={image2} alt="" />
                 </div>
                 <div class="img-slider">
                   <img src={image1} alt="" />
                 </div>
                 <div class="img-slider">
-                  <img src={image1} alt="" />
+                  <img src={image2} alt="" />
                 </div>
               </Slider>
             </div>

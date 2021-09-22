@@ -7,13 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../../../../configs/redux/actions/categoryAction";
 import { useHistory } from "react-router-dom";
 import { setProducts } from "../../../../../../configs/redux/actions/productAction";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SellingProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory()
-  const [error, setError] = useState('')
   const [colors, setColors] = useState([]);
   const [formUpload, setFormUpload] = useState({
     title: "",
@@ -75,7 +74,6 @@ const SellingProduct = () => {
   return (
     <>
       <div className={styles.contentBody}>
-        {error.length ? <p className={styles.error}>{error}</p> : ''}
         <form onSubmit={handleSubmit} enctype="multipart/form-data" id="myForm">
           <div className={styles.inventory}>
             <h5 className={styles.title}>Inventory</h5>

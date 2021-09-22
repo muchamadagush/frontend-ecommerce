@@ -87,7 +87,7 @@ const SellingProduct = () => {
               type="text"
               name="title"
               id="title"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
               actionChange={handleInput}
             />
           </div>
@@ -102,7 +102,7 @@ const SellingProduct = () => {
               type="number"
               name="price"
               id="price"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
               actionChange={handleInput}
             />
             <label htmlFor="stock" className={`d-block ${styles.label}`}>
@@ -112,7 +112,7 @@ const SellingProduct = () => {
               type="number"
               name="stock"
               id="stock"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
               actionChange={handleInput}
             />
             <label htmlFor="category" className={`d-block ${styles.label}`}>

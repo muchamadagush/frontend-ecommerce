@@ -1,6 +1,7 @@
 .aside {
   background: #fff;
   padding-left: 100px;
+  padding-right: 20px;
 }
 
 .imgProfile {
@@ -42,6 +43,7 @@
 .menus {
   list-style: none;
   padding: unset;
+  padding-right: 20px;
 }
 
 .toggles {
@@ -58,4 +60,10 @@
 .toggles:hover,
 .toggles.active {
   color: #000;
+}
+
+@media (max-width: 576px) {
+  .aside {
+    padding-top: 90px;
+  }
 }

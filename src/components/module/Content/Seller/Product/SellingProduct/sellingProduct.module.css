@@ -43,9 +43,12 @@ hr {
   margin: 1rem 0 !important;
 }
 
-.error {
-  padding: 7px 15px;
-  background-color: red;
-  color: #fff;
-  font-size: 12px;
+.photo {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .contentBody {
+    width: 90%;
+  }
 }

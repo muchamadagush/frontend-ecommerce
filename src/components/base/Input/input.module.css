@@ -30,10 +30,20 @@
   padding-left: 25px;
 }
 
+.formInputProduct {
+  padding-left: .75rem;
+  font-size: 1rem !important;
+  line-height: 1.5;
+}
+
 @media (max-width: 576px) {
   .smallSearch,
   .search {
     height: 36px;
+    width: 100%;
+  }
+
+  .formInputProduct {
     width: 100%;
   }
 }

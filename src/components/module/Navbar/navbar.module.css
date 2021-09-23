@@ -83,6 +83,10 @@ li {
   margin-left: 40px;
 }
 
+.isMobile {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .navbar {
     display: flex;
@@ -106,5 +110,9 @@ li {
 
   .marginInMobile {
     margin-top: 16px;
+  }
+
+  .isMobile {
+    display: block;
   }
 }

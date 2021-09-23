@@ -86,6 +86,7 @@ const SellingProduct = () => {
               name="title"
               id="title"
               myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               actionChange={handleInput}
             />
           </div>
@@ -101,6 +102,7 @@ const SellingProduct = () => {
               name="price"
               id="price"
               myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               actionChange={handleInput}
             />
             <label htmlFor="stock" className={`d-block ${styles.label}`}>
@@ -111,6 +113,7 @@ const SellingProduct = () => {
               name="stock"
               id="stock"
               myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               actionChange={handleInput}
             />
             <label htmlFor="category" className={`d-block ${styles.label}`}>
@@ -181,6 +184,7 @@ const SellingProduct = () => {
               id=""
               onChange={handleInput}
               accept="image/jpeg, image/png, image/jpg"
+              className={styles.photo}
               multiple
             />
           </div>

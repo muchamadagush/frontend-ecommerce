@@ -61,3 +61,13 @@ form {
   text-align: center;
   margin-bottom: 20px;
 }
+
+@media (max-width: 576px) {
+  .contentBody {
+    width: 95%;
+  }
+
+  .label {
+    text-align: left;
+  }
+}

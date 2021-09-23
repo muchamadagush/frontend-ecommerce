@@ -35,7 +35,7 @@ const Seller = () => {
           </Sidebar>
         </div>
 
-        <div className={`${styles.content} ${styles.right}`}>
+        <div className={`${styles.content} ${styles.right} ${sidebarOpen  !== true ? `${styles.index}` : '' }`}>
           <Switch>
             <Route path="/seller/store" component={Store} />
             <Route path="/seller/products" component={MyProduct} />

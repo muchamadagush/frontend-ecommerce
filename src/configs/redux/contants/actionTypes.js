@@ -14,6 +14,7 @@ export const actionTypes = {
   // Users
   SET_USER : "SET_USER",
   UPDATE_USER : "UPDATE_USER",
+  GET_USER : "GET_USER",
 
   // Orders
   SET_ORDER : "SET_ORDER",

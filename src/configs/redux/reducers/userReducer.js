@@ -1,5 +1,6 @@
 const initialState = {
   profile: {},
+  user: {},
   avatar: "https://images.macrumors.com/t/XjzsIpBxeGphVqiWDqCzjDgY4Ck=/800x0/article-new/2019/04/guest-user-250x250.jpg",
   error: null
 }
@@ -25,6 +26,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state
       }
+    case 'GET_USER':
+        return {
+          ...state,
+          user: action.payload
+        }
     default:
       return state
   }

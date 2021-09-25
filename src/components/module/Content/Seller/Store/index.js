@@ -43,7 +43,6 @@ const Store = () => {
     setImgPreview(URL.createObjectURL(files));
   };
 
-  console.log(form);
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const files = document.querySelector('input[type="file"]').files[0];

@@ -87,4 +87,8 @@ form {
   .label {
     text-align: left;
   }
+
+  .formControl {
+    width: 100%;
+  }
 }

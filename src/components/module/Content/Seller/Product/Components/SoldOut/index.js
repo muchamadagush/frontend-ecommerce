@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import progress from '../../../../../../../assets/images/progress.svg'
 import styles from './soldOut.module.css'
 

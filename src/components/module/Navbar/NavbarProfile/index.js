@@ -34,7 +34,13 @@ const Nav = ({ handleInputSearch, handleSearch, handleSidebar }) => {
         </Navbar>
       ) : (
         <Navbar>
-          <button onClick={handleSidebar}>Open sidebar</button>
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={handleSidebar}
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <Brand />
           <Toggler>
             <Filter

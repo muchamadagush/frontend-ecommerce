@@ -9,7 +9,7 @@ import Cart from "./Cart";
 import Account from "./Account";
 import jwt from "jwt-decode";
 
-const Nav = ({ handleInputSearch, handleSearch, handleSidebar }) => {
+const Nav = ({ handleInputSearch, handleSearch }) => {
   const dataUser = jwt(localStorage.getItem("token"));
 
   const { status } = useSelector((state) => state.orders);

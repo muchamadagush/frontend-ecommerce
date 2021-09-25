@@ -78,3 +78,17 @@ form {
   background-color: rgb(219, 48, 34);
   color: #ffffff;
 }
+
+@media (max-width: 576px){
+  .contentBody {
+    width: 100%;
+  }
+
+  .label {
+    text-align: left;
+  }
+
+  .formControl {
+    width: 100%;
+  }
+}

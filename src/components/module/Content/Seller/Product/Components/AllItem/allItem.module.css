@@ -30,3 +30,13 @@
   transform: translateY(5px);
   padding-left: 3px;
 }
+
+.isMobile {
+  display: revert;
+}
+
+@media (max-width: 576px) {
+  .isMobile {
+    display: none;
+  }
+}

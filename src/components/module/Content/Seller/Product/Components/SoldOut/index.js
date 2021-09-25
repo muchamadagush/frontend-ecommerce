@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import progress from '../../../../../../../assets/images/progress.svg'
+import styles from './soldOut.module.css'
 
 const SoldOut = () => {
   return (
@@ -7,23 +9,17 @@ const SoldOut = () => {
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
-            <th>
-              <Link class="dropdown-toggle" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">Product name</Link>
-            </th>
-            <th>
-              <Link class="dropdown-toggle" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">Price</Link>
-            </th>
-            <th>
-              <Link class="dropdown-toggle" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">Stock</Link>
-            </th>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Stock</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td colspan="3" class="text-center">
-              <img class="empty" src="../../asset/empty.svg" alt="Empty" />
+              <img className={styles.image} src={progress} alt="Empty" />
               <br />
-              <span>You don't have a product yet</span>
+              <p className={styles.info}>In the development stage</p>
             </td>
           </tr>
         </tbody>

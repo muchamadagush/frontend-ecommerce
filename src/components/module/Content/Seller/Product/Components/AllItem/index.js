@@ -104,10 +104,10 @@ const AllItem = () => {
       <table className='table table-hover table-bordered'>
         <thead>
           <tr>
-            <th>Image</th>
+            <th className={styles.isMobile}>Image</th>
             <th>Name</th>
-            <th>Stock</th>
-            <th>Price</th>
+            <th className={styles.isMobile}>Stock</th>
+            <th className={styles.isMobile}>Price</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -115,12 +115,12 @@ const AllItem = () => {
           {products.data &&
             products.data.map((item, index) => (
               <tr key={index}>
-                <td className={styles.mainImageBox}>
+                <td className={`${styles.mainImageBox} ${styles.isMobile}`}>
                   <img className={styles.mainImage} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="product" />
                 </td>
                 <td>{item.title}</td>
-                <td>{item.stock}</td>
-                <td>{item.price}</td>
+                <td className={styles.isMobile}>{item.stock}</td>
+                <td className={styles.isMobile}>{item.price}</td>
                 <td>
                   <Link to={`/seller/update/${item.id}`} products={products} className="btn btn-warning btn-sm mx-1 my-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

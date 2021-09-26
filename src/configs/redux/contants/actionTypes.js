@@ -28,4 +28,5 @@ export const actionTypes = {
 
   // Address
   SET_MODALS : "SET_MODALS",
+  SET_ADDRESS : "SET_ADDRESS",
 }

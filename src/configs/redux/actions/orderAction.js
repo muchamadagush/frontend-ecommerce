@@ -43,10 +43,28 @@ export const updateQtyOrder = (id, data) => async (dispatch) => {
 export const updateStatusOrder = (id, data, history) => async (dispatch) => {
   try {
     await blanjaApi.patch(`v1/orders/${id}`, data)
-    const status = false
-    dispatch({ type: actionTypes.UPDATE_STATUS, payload: status })
     history.push('/')
     return "Successfully update status order"
+  } catch (error) {
+    return error.response
+  }
+}
+
+export const checkotOrder = (data, history) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    await blanjaApi.patch(`v1/orders`, data, config)
+    toast.success('Successfully checkout order!', { position: toast.POSITION.TOP_CENTER })
+    setTimeout(() => {
+      const status = false
+      dispatch({ type: actionTypes.UPDATE_STATUS, payload: status })
+      history.push('/')
+    }, 2500);
+    return "Successfully checkout order"
   } catch (error) {
     return error.response
   }

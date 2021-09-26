@@ -115,6 +115,27 @@
     color: #db3022;
 }
 
+.buttonAddAddress {
+  padding: 5px 20px;
+  border: 1px solid #9b9b9b;
+  border-radius: 23px;
+  width: fit-content;
+  text-decoration: none;
+  margin-top: 10px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.buttonAddAddress:hover {
+  color: #ffffff;
+  background-color: #db3022;
+}
+
+.warn {
+  font-size: 14px;
+  color: #db3022;
+}
+
 @media (max-width: 576px) {
   .marginTopBody {
     margin-top: 90px;

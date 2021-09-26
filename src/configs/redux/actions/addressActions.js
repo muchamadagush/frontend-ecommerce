@@ -22,3 +22,18 @@ export const setModal = (data) => (dispatch) => {
   console.log(data)
   dispatch({ type: actionTypes.SET_MODALS, payload: data })
 }
+
+export const getPrimaryAddress = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await blanjaApi.get(`v1/address`, config);
+
+    dispatch({ type: actionTypes.SET_ADDRESS, payload: response.data.data[0] })
+  } catch (error) {
+    return error;
+  }
+}

@@ -24,5 +24,8 @@ export const actionTypes = {
   FETCH_ORDERS_WHERE_USERID : "FETCH_ORDERS_WHERE_USERID",
 
   // Colors
-  FETCH_COLORS : "FETCH_COLORS"
+  FETCH_COLORS : "FETCH_COLORS",
+
+  // Address
+  SET_MODALS : "SET_MODALS",
 }

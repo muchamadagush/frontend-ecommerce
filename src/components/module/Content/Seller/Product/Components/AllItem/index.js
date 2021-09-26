@@ -1,32 +1,25 @@
 import styles from "./allItem.module.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, fetchProducts } from "../../../../../../../configs/redux/actions/productAction";
 import Input from "../../../../../../base/Input";
 import imgSearch from '../../../../../../../assets/images/Search.svg'
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const AllItem = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [totalPage, setTotalPage] = useState(0)
   const [perPage, setPerPage] = useState(5)
   const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState("title")
   const [sort, setSort] = useState("ASC")
   const [search, setSearch] = useState('')
-  const [handleFunc, setHandleFunc] = useState(0)
-
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id))
-      .then((res) => toast.success(res,{position: toast.POSITION.TOP_CENTER}),
-        (err) => toast.error(err.response.data.message, {position: toast.POSITION.TOP_CENTER}))
-        setHandleFunc(handleFunc + 1)
-  }
 
   const confirm = (id) => {
     confirmAlert({
@@ -35,7 +28,7 @@ const AllItem = () => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => handleDelete(id)
+          onClick: () => dispatch(deleteProduct(id, history))
         },
         {
           label: 'No',
@@ -48,7 +41,7 @@ const AllItem = () => {
   useEffect(() => {
     dispatch(fetchProducts(search, page, perPage, orderBy, sort))
       .then((res) => setTotalPage(res))
-  }, [dispatch, sort, page, perPage, orderBy, search, handleFunc])
+  }, [dispatch, sort, page, perPage, orderBy, search])
 
 
   const { products } = useSelector(state => state.products)

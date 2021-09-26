@@ -37,6 +37,7 @@ export const setProducts = (data, history) => async (dispacth) => {
     };
 
     await blanjaApi.post(`v1/products`, data, config)
+    fetchProducts()
     toast.success('Successfully create product!', { position: toast.POSITION.TOP_CENTER })
     setTimeout(() => {
       dispacth({ type: actionTypes.SET_PRODUCTS })
@@ -61,7 +62,7 @@ export const fetchProductByCategory = (categoryId) => async (dispatch) => {
   dispatch({ type: actionTypes.FETCH_PRODUCT_BY_CATEGORY, payload: response.data.data })
 }
 
-export const deleteProduct = (id) => async (dispacth) => {
+export const deleteProduct = (id, history) => async (dispacth) => {
   try {
     const token = localStorage.getItem("token")
     const config = {
@@ -70,8 +71,13 @@ export const deleteProduct = (id) => async (dispacth) => {
 
     await blanjaApi.delete(`v1/products/${id}`, config)
     dispacth({ type: actionTypes.DELETE_PRODUCT })
-    return 'Successfully delete item!'
+    toast.success('Successfully delete product!', { position: toast.POSITION.TOP_CENTER })
+    setTimeout(() => {
+      history.push('/seller/store')
+      return 'Successfully delete item!'
+    }, 2500);
   } catch (error) {
+    toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
     return error
   }
 }
@@ -85,10 +91,13 @@ export const updateProduct = (id, data, history) => async (dispacth) => {
 
     const response = await blanjaApi.put(`v1/products/${id}`, data, config)
     dispacth({ type: actionTypes.UPDATE_PRODUCT, payload: response.data.data })
-    history.push('/seller/products')
-    return 'Successfully update item!'
+    toast.success('Successfully update product!', { position: toast.POSITION.TOP_CENTER })
+    setTimeout(() => {
+      history.push('/seller/products')
+      return 'Successfully update product!'
+    }, 2500);
   } catch (error) {
-    console.log(error.response.data)
+    toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
     return error.response.data
   }
 }

@@ -45,6 +45,42 @@ hr {
 
 .photo {
   width: 100%;
+  display: none;
+}
+
+.containerThumbnail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.thumbnail {
+  width: 180px;
+  height: 180px;
+  border: 1px solid #9b9b9b;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.thumbnails {
+  width: 140px;
+  height: 140px;
+  border: 1px solid #9b9b9b;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.containerInputPhoto {
+  width: 100%;
+  text-align: center;
+}
+
+.labelUploadPhoto {
+  padding: 10px 20px;
+  border-radius: 23px;
+  border: 1px solid #9b9b9b;
+  cursor: pointer;
 }
 
 @media (max-width: 576px) {

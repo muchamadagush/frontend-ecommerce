@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../../../../configs/redux/actions/categoryAction";
 import { useHistory } from "react-router-dom";
 import { setProducts } from "../../../../../../configs/redux/actions/productAction";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import thumbnail from "../../../../../../assets/images/thumbnail.svg";
+import { ToastContainer, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const SellingProduct = () => {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const [colors, setColors] = useState([]);
   const [formUpload, setFormUpload] = useState({
     title: "",
@@ -22,6 +23,7 @@ const SellingProduct = () => {
     description: "",
     categoryId: "",
     color: "",
+    imagePreview: [],
   });
 
   useEffect(() => {
@@ -37,7 +39,6 @@ const SellingProduct = () => {
       });
   }, [dispatch]);
 
-  
   const handleInput = (e) => {
     e.preventDefault();
     setFormUpload({
@@ -46,33 +47,38 @@ const SellingProduct = () => {
     });
   };
 
+  const handleInputImage = (e) => {
+    e.preventDefault();
+    const files = [...e.target.files];
+    setFormUpload({
+      ...formUpload,
+      imagePreview: files.map((item) => URL.createObjectURL(item)),
+    });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const files = document.querySelector('input[type="file"]').files
+    const files = document.querySelector('input[type="file"]').files;
     const data = new FormData();
-    data.append('title', formUpload.title)
-    data.append('price', formUpload.price)
-    data.append('stock', formUpload.stock)
-    data.append('type', formUpload.type)
-    data.append('description', formUpload.description)
-    data.append('categoryId', formUpload.categoryId)
-    data.append('color', formUpload.color)
+    data.append("title", formUpload.title);
+    data.append("price", formUpload.price);
+    data.append("stock", formUpload.stock);
+    data.append("type", formUpload.type);
+    data.append("description", formUpload.description);
+    data.append("categoryId", formUpload.categoryId);
+    data.append("color", formUpload.color);
     for (let i = 0; i < files.length; i++) {
-      data.append('image', files[i])
-    };
+      data.append("image", files[i]);
+    }
 
-    dispatch(setProducts(data, history))
-    .then(
-      (res) => history.push('/seller/products'),
-      (err) => toast(err.response.data.message),
-    )
-    window.scrollTo(0, 0)
+    dispatch(setProducts(data, history));
   };
 
   const { categories } = useSelector((state) => state.categories);
-  
+
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <div className={styles.contentBody}>
         <form onSubmit={handleSubmit} enctype="multipart/form-data" id="myForm">
           <div className={styles.inventory}>
@@ -178,15 +184,61 @@ const SellingProduct = () => {
             <h5 className={styles.title}>Photo of goods</h5>
             <hr />
 
+            {formUpload.imagePreview.length > 0 ? (
+              <div className={styles.containerThumbnail}>
+                {formUpload.imagePreview.map((item) => (
+                  <img
+                    src={item}
+                    key={item}
+                    alt="UploadedImage"
+                    className={item === formUpload.imagePreview[0] ? styles.thumbnail : styles.thumbnails}
+                  />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div className={styles.containerThumbnail}>
+                  <img
+                    src={thumbnail}
+                    alt="UploadedImage"
+                    className={styles.thumbnail}
+                  />
+                  <img
+                    src={thumbnail}
+                    alt="UploadedImage"
+                    className={styles.thumbnails}
+                  />
+                  <img
+                    src={thumbnail}
+                    alt="UploadedImage"
+                    className={styles.thumbnails}
+                  />
+                  <img
+                    src={thumbnail}
+                    alt="UploadedImage"
+                    className={styles.thumbnails}
+                  />
+                  <img
+                    src={thumbnail}
+                    alt="UploadedImage"
+                    className={styles.thumbnails}
+                  />
+                </div>
+              </>
+            )}
+
+            <div className={styles.containerInputPhoto}>
+            <label htmlFor="image" className={styles.labelUploadPhoto}>Upload Image</label>
             <input
               type="file"
               name="image"
-              id=""
-              onChange={handleInput}
+              id="image"
+              onChange={handleInputImage}
               accept="image/jpeg, image/png, image/jpg"
               className={styles.photo}
               multiple
             />
+            </div>
           </div>
 
           <div className={styles.description}>

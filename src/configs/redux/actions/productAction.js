@@ -1,5 +1,6 @@
 import blanjaApi from "../../api/blanjaApi";
-import { actionTypes } from "../contants/actionTypes"
+import { actionTypes } from "../contants/actionTypes";
+import { toast } from 'react-toastify';
 
 export const fetchProducts = (search, page, perPage, orderBy, sort) => async (dispatch) => {
   try {
@@ -28,7 +29,7 @@ export const fetchProducts = (search, page, perPage, orderBy, sort) => async (di
   }
 }
 
-export const setProducts = (data) => async (dispacth) => {
+export const setProducts = (data, history) => async (dispacth) => {
   try {
     const token = localStorage.getItem("token")
     const config = {
@@ -36,9 +37,14 @@ export const setProducts = (data) => async (dispacth) => {
     };
 
     await blanjaApi.post(`v1/products`, data, config)
-    dispacth({ type: actionTypes.SET_PRODUCTS })
+    toast.success('Successfully create product!', { position: toast.POSITION.TOP_CENTER })
+    setTimeout(() => {
+      dispacth({ type: actionTypes.SET_PRODUCTS })
+      history.push('/seller/products')
+    }, 2500);
     return "Successfully create product"
   } catch (error) {
+    toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
     return error.response.data.message
   }
 }

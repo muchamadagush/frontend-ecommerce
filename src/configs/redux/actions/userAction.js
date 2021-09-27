@@ -45,7 +45,7 @@ export const register = (data, history) => async (dispatch) => {
   }
 };
 
-export const updateProfile = (data) => async (dispatch) => {
+export const updateProfile = (data, history) => async (dispatch) => {
   try {
     console.log(data);
     const token = localStorage.getItem("token");
@@ -56,7 +56,10 @@ export const updateProfile = (data) => async (dispatch) => {
     const response = await blanjaApi.patch(`v1/users`, data, config);
     getUser();
     toast.success('Successfully update profile!', { position: toast.POSITION.TOP_CENTER })
-    return response;
+    setTimeout(() => {
+      history.push('/')
+      return response;
+    }, 2500);
   } catch (error) {
     toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
     return error;

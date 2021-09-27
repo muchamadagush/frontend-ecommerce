@@ -10,9 +10,11 @@ import {
 } from "../../../../../configs/redux/actions/userAction";
 import { ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useHistory } from "react-router";
 
 const Store = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [imgPreview, setImgPreview] = useState("");
 
   useEffect(() => {
@@ -53,7 +55,7 @@ const Store = () => {
     data.append("description", form.description);
     data.append("avatar", files);
 
-    dispatch(updateProfile(data));
+    dispatch(updateProfile(data, history));
   };
 
   return (

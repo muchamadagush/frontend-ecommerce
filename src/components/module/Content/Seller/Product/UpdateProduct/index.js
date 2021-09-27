@@ -122,7 +122,8 @@ const UpdateProduct = () => {
               type="text"
               name="title"
               id="title"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               value={formUpload.title}
               actionChange={handleChange}
             />

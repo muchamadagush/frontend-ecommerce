@@ -138,7 +138,8 @@ const UpdateProduct = () => {
               type="number"
               name="price"
               id="price"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               value={formUpload.price}
               actionChange={handleChange}
             />
@@ -149,7 +150,8 @@ const UpdateProduct = () => {
               type="number"
               name="stock"
               id="stock"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               value={formUpload.stock}
               actionChange={handleChange}
             />
@@ -160,7 +162,8 @@ const UpdateProduct = () => {
               type="text"
               name="status"
               id="status"
-              myOwnClass="form-control"
+              myOwnClass="form-control rounded"
+              myClass="formInputProduct"
               value={formUpload.status}
               actionChange={handleChange}
             />

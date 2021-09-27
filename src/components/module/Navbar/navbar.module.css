@@ -73,10 +73,17 @@ li {
   list-style: none;
 }
 
-.profile {
+.containerImage {
   width: 32px;
   height: 32px;
+  object-fit: contain;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .navbars {

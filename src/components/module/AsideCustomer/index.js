@@ -1,20 +1,17 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./asideCustomer.module.css";
-import profile from "../../../assets/images/profile-image.svg";
-import jwt from "jwt-decode";
 
 const AsideCustomer = () => {
-  const dataUser = jwt(localStorage.getItem('token'))
+  const { avatar, user } = useSelector(state => state.user)
 
   return (
     <>
       <aside className={styles.aside}>
         <div className="d-flex">
-          {dataUser.avatar ? (
-            <img className={styles.imgProfile} src={`${process.env.REACT_APP_API_URL}files/${dataUser.avatar}`} alt="choosedImage" />
-          ) : (
-            <img className={styles.imgProfile} src={profile} alt="choosedImage" />
-          )}
+          <div className={styles.containerImage}>
+            <img className={styles.imgProfile} src={user.avatar ? `${process.env.REACT_APP_API_URL}files/${user.avatar}` : avatar} alt="profile" />
+          </div>
           <div className={styles.detailProfile}>
             <span className={styles.nameProfile}>Mark</span>
             <Link to={""} className={styles.editProfile}>

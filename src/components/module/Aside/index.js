@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom'
 import styles from './aside.module.css'
-import profile from '../../../assets/images/profile-image.svg'
+import { useSelector } from 'react-redux'
 
 const Aside = () => {
+  const { avatar, user } = useSelector(state => state.user)
   return (
     <>
       <aside className={styles.aside}>
         <div className='d-flex'>
-          <img className={styles.imgProfile} src={profile} alt="profile" />
+          <img className={styles.imgProfile} src={user.avatar ? `${process.env.REACT_APP_API_URL}files/${user.avatar}` : avatar} alt="profile" />
           <div className={styles.detailProfile}>
             <span className={styles.nameProfile}>Mark</span>
-            <Link to={''} className={styles.editProfile}>
+            <Link to={'/seller/store'} className={styles.editProfile}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 12.6662V16H3.33379L13.1707 6.16308L9.8369 2.82928L0 12.6662Z" fill="#9B9B9B" />

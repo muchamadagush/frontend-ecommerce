@@ -1,13 +1,19 @@
 import styles from '../navbar.module.css'
 import { Link, useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import jwt from "jwt-decode";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getUser } from '../../../../configs/redux/actions/userAction'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Account = ({ role }) => {
   const history = useHistory()
-  const dataUser = jwt(localStorage.getItem('token'))
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getUser())
+  }, [dispatch])
 
-  const { avatar } = useSelector(state => state.user)
+  const { avatar, user } = useSelector(state => state.user)
 
   const logout = (e) => {
     e.preventDefault()
@@ -16,10 +22,16 @@ const Account = ({ role }) => {
     history.push('/')
   }
 
+  const handleUnuseComponent = (e) => {
+    e.preventDefault()
+    toast.info('In development stage!', { position: toast.POSITION.TOP_CENTER })
+  }
+
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <li className="nav-item ms-3">
-        <Link className="nav-link" href="#">
+        <Link className="nav-link" onClick={handleUnuseComponent}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -32,7 +44,7 @@ const Account = ({ role }) => {
         </Link>
       </li>
       <li className="nav-item ms-3">
-        <Link className="nav-link" href="#">
+        <Link className="nav-link" onClick={handleUnuseComponent}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
@@ -45,7 +57,7 @@ const Account = ({ role }) => {
       <li className="nav-item ms-3">
         <div class="dropdown">
           <Link class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img className={styles.profile} src={dataUser.avatar ? `${process.env.REACT_APP_API_URL}files/${dataUser.avatar}` : avatar} alt="profile" />
+            <img className={styles.profile} src={user.avatar ? `${process.env.REACT_APP_API_URL}files/${user.avatar}` : avatar} alt="profile" />
           </Link>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <Link className="dropdown-item" to={role === 1 ? '/seller/store' : '/user/profile'}>

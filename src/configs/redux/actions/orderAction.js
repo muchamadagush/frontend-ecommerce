@@ -78,3 +78,18 @@ export const fetchAllOrders = (userId) => async (dispatch) => {
     return error.response
   }
 }
+
+export const fetchOrderBySeller = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await blanjaApi.get('v1/orders/seller', config)
+    dispatch({ type: actionTypes.FETCH_ORDERS_SELLER, payload: response.data.data})
+
+  } catch (error) {
+    return error.response
+  }
+}

@@ -18,7 +18,6 @@ export const fetchProducts = (search, page, perPage, orderBy, sort) => async (di
       query = query + `&sortBy=${sort}`
     }
     const response = await blanjaApi.get(query)
-    console.log(search, page, perPage, orderBy, sort)
 
     dispatch({ type: actionTypes.FETCH_PRODUCTS, payload: response.data })
     return response.data.totalPage

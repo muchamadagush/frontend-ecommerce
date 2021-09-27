@@ -25,3 +25,24 @@
   line-height: 24px;
   margin: 0 1rem;
 }
+
+@media (max-width: 576px){
+  .contentBody {
+    width: 100%;
+    padding: 10px;
+    min-height: 80vh;
+  }
+
+  .tabBar {
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+  }
+
+  .myTabs {
+    width: max-content;
+  }
+
+  .isMobile {
+    display: none;
+  }
+}

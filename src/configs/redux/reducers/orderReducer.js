@@ -5,41 +5,47 @@ const initialState = {
   status: false,
   error: null,
   orders: [],
-  allItem: []
-}
+  allItem: [],
+  seller: [],
+};
 
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_ORDER:
       return {
         ...state,
-        status: action.payload
-      }
+        status: action.payload,
+      };
     case actionTypes.FETCH_ORDERS:
       return {
         ...state,
         orderdetails: action.payload,
         status: action.status,
-        orders: action.orders
-      }
+        orders: action.orders,
+      };
     case actionTypes.UPDATE_QTY:
       return {
         ...state,
-        orders: action.payload
-      }
+        orders: action.payload,
+      };
     case actionTypes.UPDATE_STATUS:
       return {
         ...state,
-        status: action.payload
-      }
+        status: action.payload,
+      };
     case actionTypes.FETCH_ORDERS_WHERE_USERID:
       return {
         ...state,
-        allItem: action.payload
-      }
+        allItem: action.payload,
+      };
+    case actionTypes.FETCH_ORDERS_SELLER:
+      return {
+        ...state,
+        seller: action.payload,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default orderReducer
+export default orderReducer;

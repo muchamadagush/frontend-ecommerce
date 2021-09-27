@@ -1,6 +1,7 @@
 import blanjaApi from "../../api/blanjaApi";
 import { actionTypes } from "../contants/actionTypes";
 import { toast } from 'react-toastify'
+import { fetchOrderBySeller } from "./orderAction";
 
 export const getUser = () => async (dispatch) => {
   try {
@@ -25,6 +26,10 @@ export const login = (data, history) => (dispatch) => {
       dispatch({ type: "LOGIN_USER", payload: resultLogin });
 
       getUser()
+      
+      if(res.data.user.role === 'seller') {
+        fetchOrderBySeller()
+      }
       
       localStorage.setItem("token", resultLogin.token);
       history.push("/");

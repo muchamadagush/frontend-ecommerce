@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, fetchProducts } from "../../../../../../../configs/redux/actions/productAction";
 import Input from "../../../../../../base/Input";
 import imgSearch from '../../../../../../../assets/images/Search.svg'
-import { ToastContainer, Zoom } from 'react-toastify';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -32,7 +32,7 @@ const AllItem = () => {
         },
         {
           label: 'No',
-          onClick: () => alert('Click No')
+          onClick: () => toast.error('Canceled!', { position: toast.POSITION.TOP_CENTER })
         }
       ]
     });

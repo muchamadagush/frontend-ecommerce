@@ -98,7 +98,7 @@ npm run dev
 ## Screenshots
 
 <div align="center">
-    <img width="350" src="./screenshots/React App.png">   
+    <img width="350" src="./screenshots/React App(0).png">   
     <img width="350" src="./screenshots/React App(1).png">
 </div>
 <div align="center">

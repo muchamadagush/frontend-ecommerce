@@ -93,7 +93,7 @@ npm run dev
 
 ### Related Project
 * [`Frontend E-commerce`](https://github.com/muchamadagush/frontend-ecommerce)
-* [`Backend E-commerce`](https://github.com/muchamadagush/ecommerce)
+* [`Backend E-commerce`](https://github.com/muchamadagush/backend-ecommerce)
 
 ## Screenshots
 

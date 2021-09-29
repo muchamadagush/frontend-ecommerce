@@ -98,28 +98,32 @@ npm run dev
 ## Screenshots
 
 <div align="center">
-    <img width="350" src="./screenshots/React App(0).png">   
-    <img width="350" src="./screenshots/React App(1).png">
+    <img width="350" src="./screenshots/React App(13).png">   
+    <img width="350" src="./screenshots/React App(14).png">
 </div>
 <div align="center">
-    <img width="350" src="./screenshots/React App(2).png">   
-    <img width="350" src="./screenshots/React App(3).png">
+    <img width="350" src="./screenshots/React App(0).png">   
+    <img width="350" src="./screenshots/React App(2).png">
+</div>
+<div align="center">
+    <img width="350" src="./screenshots/React App(3).png">   
+    <img width="350" src="./screenshots/React App(15).png">
 </div>
 <div align="center">
     <img width="350" src="./screenshots/React App(5).png">   
     <img width="350" src="./screenshots/React App(6).png">
 </div>
 <div align="center">
-    <img width="350" src="./screenshots/React App(7).png">   
     <img width="350" src="./screenshots/React App(8).png">
-</div>
-<div align="center">
-    <img width="350" src="./screenshots/React App(9).png">   
     <img width="350" src="./screenshots/React App(10).png">   
 </div>
 <div align="center">
+    <img width="350" src="./screenshots/React App(9).png">   
     <img width="350" src="./screenshots/React App(11).png">   
+</div>
+<div align="center">
     <img width="350" src="./screenshots/React App(12).png">   
+    <img width="350" src="./screenshots/React App(7).png">   
 </div>
 
 ## Contact

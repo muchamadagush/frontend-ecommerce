@@ -94,7 +94,7 @@ const Product = () => {
                   </span>
                   <div className={styles.price}>
                     <span className={styles.priceTitle}>Price</span>
-                    <span className={styles.priceValue}>$ {item.price}</span>
+                    <span className={styles.priceValue}>Rp {item.price}</span>
                   </div>
                   <div className={styles.color}>
                     <span className={styles.colorTitle}>Color</span>

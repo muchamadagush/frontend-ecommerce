@@ -93,3 +93,21 @@ export const fetchOrderBySeller = () => async (dispatch) => {
     return error.response
   }
 }
+
+export const deleteOrderDetails = (selected) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    console.log(token)
+
+    await blanjaApi.delete(`v1/orders/${selected}`, config)
+
+    toast.success('Successfully delete order!', { position: toast.POSITION.TOP_CENTER })
+  } catch (error) {
+    console.log(error.response.data.message)
+    return error.response
+  }
+}

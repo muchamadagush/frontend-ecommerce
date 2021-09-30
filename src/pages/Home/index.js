@@ -143,7 +143,7 @@ const Home = (props) => {
               <div className="row row-cols-2">
                 {products.data && products.data.map((product, index) => (
                   <div className={`col-xs-6 col-sm-4 mt-3 ${styles.colMd}`}>
-                    <Link className={styles.link} to="product/id" key={index}>
+                    <Link className={styles.link} to={`product/${product.id}`} key={index}>
                       <Card
                         image={`${process.env.REACT_APP_API_URL}files/${product.image[0]}`}
                         title={product.title.substring(0, 35)}

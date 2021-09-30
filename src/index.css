@@ -205,6 +205,15 @@ img.img-thumbnail.img-fluid.uploaded-img.mr-2 {
   height: 200px;
 }
 
+button:disabled {
+  cursor: pointer;
+  color: #8e8e93;
+}
+
+button:disabled:hover {
+  color: #8e8e93;
+}
+
 @media (max-width: 576px) {
   .img-slider {
     height: 90px;

@@ -65,6 +65,8 @@ label {
 .delete {
   color: #db3022;
   text-decoration: none;
+  border: none;
+  background-color: unset;
 }
 
 .delete:hover {

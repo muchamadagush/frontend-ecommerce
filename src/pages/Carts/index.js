@@ -1,17 +1,22 @@
 import { useEffect } from "react"
 import styles from "./cart.module.css"
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Button from "../../components/base/Button";
 import Nav from "../../components/module/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrders, updateQtyOrder } from "../../configs/redux/actions/orderAction";
+import { deleteOrderDetails, fetchOrders, updateQtyOrder } from "../../configs/redux/actions/orderAction";
 import jwt from "jwt-decode";
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Carts = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const user = jwt(localStorage.getItem('token'))
   const userId = user.id
+  let selected = []
 
   useEffect(() => {
     dispatch(fetchOrders(userId))
@@ -27,20 +32,61 @@ const Carts = () => {
       .then((res) => dispatch(fetchOrders(userId)))
   }
 
-  const handleQtyMinus = (id, qty) => {
-    const data = {
-      qty: qty - 1
+  const handleQtyMinus = (params) => {
+    if (params) {
+      const data = {
+        qty: params.qty - 1
+      }
+      dispatch(updateQtyOrder(params.id, data))
+        .then(() => dispatch(fetchOrders(userId)))
     }
-    dispatch(updateQtyOrder(id, data))
-      .then((res) => dispatch(fetchOrders(userId)))
   }
 
   const handleSubmit = () => {
     history.push('/checkout')
   }
 
+  function removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  const handleSelected = (id) => {
+    if (selected.indexOf(id) === -1) {
+      selected.push(id)
+    } else {
+      removeItemOnce(selected, id);
+    }
+  }
+
+  const handleDeleteOrderDetails = () => {
+    dispatch(deleteOrderDetails(selected))
+      .then(() => dispatch(fetchOrders(userId)))
+  }
+
+  const confirm = () => {
+    confirmAlert({
+      title: 'Are you sure?',
+      message: 'You want to delete this product?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleDeleteOrderDetails()
+        },
+        {
+          label: 'No',
+          onClick: () => toast.error('Canceled!', { position: toast.POSITION.TOP_CENTER })
+        }
+      ]
+    });
+  }
+
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <Nav />
 
       <div className={`container ${styles.marginTopBody}`}>
@@ -52,16 +98,16 @@ const Carts = () => {
                 <div class="form-check">
                   <input class="form-check-input cart" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="form-check-label" for="flexCheckDefault">
-                    Select all items <span>(2 items selected)</span>
+                    Select all items
                   </label>
                 </div>
-                <Link className={styles.delete}>Delete</Link>
+                <button type="button" className={styles.delete} onClick={confirm}>Delete</button>
               </div>
 
               {orderdetails && orderdetails.map((item, index) => (
                 <div className={styles.item} key={index}>
                   <div class="form-check">
-                    <input class="form-check-input cart" type="checkbox" value="" id="flexCheckDefault" />
+                    <input class="form-check-input cart" type="checkbox" value={item.id} id="flexCheckDefault" onClick={() => handleSelected(item.id)} defaultChecked={selected.includes(item.id_order) ? true : false} />
                   </div>
                   <div className={styles.blockImage}>
                     <img className={styles.imgProduct} src={`${process.env.REACT_APP_API_URL}files/${item.image[0]}`} alt="" />
@@ -71,7 +117,7 @@ const Carts = () => {
                     <span>Zalora Cloth</span>
                   </div>
                   <div className={styles.count}>
-                    <span onClick={() => handleQtyMinus(item.id, item.qty)}>
+                    <span onClick={() => handleQtyMinus(item.qty > 1 ? ({id: item.id, qty: item.qty}) : '')}>
                       <svg className={styles.buttonCount} width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="18" cy="18" r="18" fill="#D4D4D4" />
                         <rect x="11" y="17" width="14" height="2" fill="white" />
@@ -108,7 +154,7 @@ const Carts = () => {
                 <h5>Shopping summary</h5>
                 <div class={styles.subTotal}>
                   <span>Total price</span>
-                  <span className={styles.price}>$ {item.subTotal}</span>
+                  <span className={styles.price}>Rp {item.subTotal}</span>
                 </div>
                 <Button
                   type="submit"

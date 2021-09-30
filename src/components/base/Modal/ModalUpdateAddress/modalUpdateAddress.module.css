@@ -91,4 +91,9 @@
   .index {
     padding-top: 80px;
   }
+
+  .buttonModal {
+    width: 100%;
+    font-size: 12px;
+  }
 }

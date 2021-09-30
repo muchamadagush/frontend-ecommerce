@@ -2,14 +2,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./modalUpdateAddress.module.css";
-import { ToastContainer, Zoom } from "react-toastify";
+import { toast, ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  deleteAddress,
   getAllAddress,
   setModal,
   updateAddress,
 } from "../../../../configs/redux/actions/addressActions";
 import blanjaApi from "../../../../configs/api/blanjaApi";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const addAddress = ({ id }) => {
   const dispatch = useDispatch();
@@ -78,6 +81,28 @@ const addAddress = ({ id }) => {
     });
     handleSetModal();
   };
+
+  const handleDeleteAddress = (id) => {
+    dispatch(deleteAddress(id))
+    .then(() => dispatch(getAllAddress()))
+  }
+
+  const confirm = () => {
+    confirmAlert({
+      title: 'Are you sure?',
+      message: 'You want to delete this product?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleDeleteAddress(id)
+        },
+        {
+          label: 'No',
+          onClick: () => toast.error('Canceled!', { position: toast.POSITION.TOP_CENTER })
+        }
+      ]
+    });
+  }
 
   console.log(form)
   return (
@@ -235,6 +260,15 @@ const addAddress = ({ id }) => {
                     aria-label="Close"
                   >
                     Save changes
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn ${styles.buttonModal} rounded-pill ms-2`}
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    onClick={confirm}
+                  >
+                    Delete
                   </button>
                 </div>
               </form>

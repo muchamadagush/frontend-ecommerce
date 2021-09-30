@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./modalAddress.module.css";
 import { ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { addNewAddress, setModal } from "../../../../configs/redux/actions/addressActions";
+import { addNewAddress, getAllAddress, setModal } from "../../../../configs/redux/actions/addressActions";
 
 const addAddress = () => {
   const dispatch = useDispatch()
@@ -33,7 +33,8 @@ const addAddress = () => {
 
   const handleAddNewAddress = (e) => {
     e.preventDefault();
-    dispatch(addNewAddress(form));
+    dispatch(addNewAddress(form))
+    .then(() => dispatch(getAllAddress()))
     setForm({
       name: "",
       address: "",

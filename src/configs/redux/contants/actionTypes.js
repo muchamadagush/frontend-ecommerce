@@ -31,4 +31,6 @@ export const actionTypes = {
   // Address
   SET_MODALS : "SET_MODALS",
   SET_ADDRESS : "SET_ADDRESS",
+  GET_ADDRESS : "GET_ADDRESS",
+  GET_ADDRESS_BY_ID : "GET_ADDRESS_BY_ID",
 }

@@ -1,0 +1,94 @@
+.buttonClose {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 700;
+  color: gray;
+  margin-left: auto;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 28px;
+  color: #222222;
+}
+
+.modalLabel {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #9b9b9b;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.15px;
+  color: #9b9b9b;
+}
+
+.modalInput {
+  border: 1px solid #9b9b9b;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.05));
+  border-radius: 4px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 12px;
+}
+
+.modalInput:focus {
+  border: 1px solid #9b9b9b;
+  outline: none;
+}
+
+.w810 {
+  width: 810px;
+  padding: 0 50px 50px 50px !important;
+}
+
+.w350 {
+  width: 350px;
+}
+
+.ps34 {
+  padding: 0 0 0 15px !important;
+}
+
+.buttonModal {
+  width: 160px;
+  height: 36px;
+  border: 1px solid #9b9b9b !important;
+}
+
+.buttonModal:hover {
+  background-color: #db3022;
+  color: #fff !important;
+}
+
+.hFull {
+  height: 100% !important;
+}
+
+@media (max-width: 576px){
+  .w810 {
+    width: 100%;
+    padding: 0 50px 50px 50px !important;
+  }
+  
+  .w350 {
+    width: 100%;
+  }
+
+  .ps34 {
+    padding: 0 !important;
+    margin-top: 1rem !important;
+  }
+
+  .index {
+    padding-top: 80px;
+  }
+}

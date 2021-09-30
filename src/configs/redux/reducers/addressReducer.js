@@ -3,6 +3,8 @@ import { actionTypes } from "../contants/actionTypes";
 const initialState = {
   modal: false,
   address: {},
+  allAddress: [],
+  addressById: {}
 };
 
 const addressReducer = (state = initialState, action) => {
@@ -16,6 +18,16 @@ const addressReducer = (state = initialState, action) => {
       return {
         ...state,
         address: action.payload,
+      };
+    case actionTypes.GET_ADDRESS:
+      return {
+        ...state,
+        allAddress: action.payload,
+      };
+    case actionTypes.GET_ADDRESS_BY_ID:
+      return {
+        ...state,
+        addressById: action.payload,
       };
     default:
       return state;

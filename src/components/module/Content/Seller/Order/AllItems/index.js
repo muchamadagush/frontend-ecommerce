@@ -34,7 +34,7 @@ const AllItems = () => {
                 <tbody>
                 {seller && seller.map((item, index) => (
                   <tr key={index}>
-                    <td>{(item.id).substring(0, 10)}</td>
+                    <td>{item.invoice}</td>
                     <td className={styles.isMobile}>{(item.createdAt).split('').splice(0, 10).join('')}</td>
                     <td className={styles.isMobile}>{item.subTotal}</td>
                     <td>{item.status}</td>

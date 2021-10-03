@@ -62,7 +62,7 @@ const Orders = () => {
                 <tbody>
                 {allItem && allItem.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.id}</td>
+                    <td>{item.invoice}</td>
                     <td>{(item.createdAt).split('').splice(0, 10).join('')}</td>
                     <td>{item.subTotal}</td>
                     <td>{item.status}</td>

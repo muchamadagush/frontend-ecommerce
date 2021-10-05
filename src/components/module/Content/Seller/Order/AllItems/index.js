@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchOrderBySeller } from "../../../../../../configs/redux/actions/orderAction"
-import Button from "../../../../../base/Button"
+import { Link } from "react-router-dom"
 import styles from "../order.module.css"
 
 const AllItems = () => {
@@ -13,9 +13,6 @@ const AllItems = () => {
 
   const { seller } = useSelector(state => state.orders)
 
-  const handleShowDetail = (e) => {
-    //
-  }
   return (
     <>
       <div class="data mt-3">
@@ -39,7 +36,7 @@ const AllItems = () => {
                     <td className={styles.isMobile}>{item.subTotal}</td>
                     <td>{item.status}</td>
                     <td>
-                      <Button type="button" title="Detail" ownClass="btn btn-sm btn-warning w-100 h-100 border-0" clickAction={() => handleShowDetail(item.id)} />
+                      <Link to={`/order/${item.id}`} className="btn btn-sm btn-warning w-100 h-100 border-0">Detail</Link>
                     </td>
                   </tr>
                 ))}

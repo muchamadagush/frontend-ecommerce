@@ -10,6 +10,7 @@ import Register from '../../pages/auth/Register';
 import PrivateRoute from './module/PrivateRoute';
 import PublicRoute from './module/PublicRoute';
 import Payment from '../../pages/Payment';
+import DetailOrder from '../../pages/DetailOrder';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <PrivateRoute path="/seller" component={Seller} />
         <PrivateRoute path="/user" component={Customer} />
         <PrivateRoute path="/payment/:id" component={Payment} />
+        <PrivateRoute path="/order/:id" component={DetailOrder} />
         <PublicRoute path="/login" component={Login} />
         <PublicRoute path="/register" component={Register} />
         <Route><Redirect to="/" /></Route>

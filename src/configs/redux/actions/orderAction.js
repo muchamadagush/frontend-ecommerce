@@ -145,3 +145,18 @@ export const paymentConfirm = (id, data, history) => async (dispatch) => {
     return error.response
   }
 }
+
+export const getPayment = (id) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await blanjaApi.get(`v1/orders/payment/${id}`, config)
+  
+    dispatch({ type: actionTypes.FETCH_PAYMENT, payload: response.data.data[0]})
+  } catch (error) {
+    return error.response
+  }
+}

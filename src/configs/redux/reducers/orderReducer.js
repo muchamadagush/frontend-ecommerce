@@ -8,6 +8,7 @@ const initialState = {
   allItem: [],
   seller: [],
   order: [],
+  detail: {},
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -48,6 +49,11 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         order: action.payload,
+      };
+    case actionTypes.FETCH_PAYMENT:
+      return {
+        ...state,
+        detail: action.payload,
       };
     default:
       return state;

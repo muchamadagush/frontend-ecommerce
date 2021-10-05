@@ -7,6 +7,7 @@ const initialState = {
   orders: [],
   allItem: [],
   seller: [],
+  order: [],
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -42,6 +43,11 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         seller: action.payload,
+      };
+    case actionTypes.FETCH_ORDERS_BY_ID:
+      return {
+        ...state,
+        order: action.payload,
       };
     default:
       return state;

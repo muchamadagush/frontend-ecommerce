@@ -101,13 +101,47 @@ export const deleteOrderDetails = (selected) => async (dispatch) => {
       headers: { Authorization: `Bearer ${token}` },
     };
 
-    console.log(token)
-
     await blanjaApi.delete(`v1/orders/${selected}`, config)
 
     toast.success('Successfully delete order!', { position: toast.POSITION.TOP_CENTER })
   } catch (error) {
     console.log(error.response.data.message)
+    return error.response
+  }
+}
+
+export const getOrderById = (id) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await blanjaApi.get(`v1/orders/order/${id}`, config)
+
+    dispatch({ type: actionTypes.FETCH_ORDERS_BY_ID, payload: response.data.data})
+  } catch (error) {
+    console.log(error.response.data.message)
+    return error.response
+  }
+}
+
+export const paymentConfirm = (id, data, history) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    await blanjaApi.post(`v1/orders/payment/${id}`, data, config)
+
+    toast.success('Payment in progress!', { position: toast.POSITION.TOP_CENTER })
+
+    setTimeout(() => {
+      history.push('/user/orders')
+    }, 2500);
+  } catch (error) {
+    toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
     return error.response
   }
 }

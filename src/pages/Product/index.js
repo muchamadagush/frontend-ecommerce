@@ -37,6 +37,7 @@ const Product = () => {
   const handleAddToCart = () => {
     const data = {
       productId: parseInt(id),
+      storeId: product[0].storeId,
       userId: user.id,
       size: size,
       color: color,
@@ -45,6 +46,7 @@ const Product = () => {
 
     dispatch(createOrder(data))
   }
+
 
   return (
     <>

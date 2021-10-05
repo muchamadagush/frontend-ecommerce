@@ -1,22 +1,18 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllOrders } from '../../../../../configs/redux/actions/orderAction'
-import Button from '../../../../base/Button'
 import styles from './orders.module.css'
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const dispatch = useDispatch()
-  const { profile } = useSelector(state => state.user)
+  const { user } = useSelector(state => state.user)
 
   useEffect(() => {
-    dispatch(fetchAllOrders(profile.id))
-  }, [dispatch, profile.id])
+    dispatch(fetchAllOrders(user.id))
+  }, [dispatch, user])
 
   const { allItem } = useSelector(state => state.orders)
-  
-  const handleShowDetail = () => {
-    console.log("click")
-  }
 
   return (
     <>
@@ -67,7 +63,7 @@ const Orders = () => {
                     <td>{item.subTotal}</td>
                     <td>{item.status}</td>
                     <td>
-                      <Button type="button" title="Detail" ownClass="btn btn-sm btn-warning w-100 h-100 border-0" clickAction={() => handleShowDetail(item.id)} />
+                      <Link to={`/payment/${item.id}`} className="btn btn-sm btn-warning w-100 h-100 border-0">Detail</Link>
                     </td>
                   </tr>
                 ))}
